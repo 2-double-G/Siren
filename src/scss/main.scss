@@ -1,0 +1,149 @@
+@import "utils/vars";
+@import "utils/reset";
+@import "utils/mixins";
+
+// --------DEFAULT--------
+body {
+  @include setFont($mainFont, $mainFontSize, $mainFontWeight,
+                   $mainFont-color, $mainLineHeight, inherit, inherit);
+}
+// --------GRID--------
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+// --------HEADER--------
+.header {
+  height: 25vh;
+}
+// header logo
+.logo {
+  padding: 20px 0;
+  @include setFont($logoFont, 50px, inherit, $logoFont-color,
+                   inherit, inherit, center);
+  h1 {
+    position: relative;
+    display: inline-block;
+    span {
+      font-size: 12px;
+      @include absolutePosition(absolute, -13px, 50%, unset,
+                                unset, translate(-50%, -30%) rotate(-90deg));
+    }
+  }
+}
+// headre navbar
+.nav {
+  font-size: 18px;
+  padding: 20px 0;
+  border-bottom: 1px solid $border-color;
+  ul {
+    @include flex(flex, row, center, center);
+  }
+}
+// navbar links
+.nav__link {
+  padding: 0 30px;
+  a {
+    @include setFont($mainFont, 18px, $mainFontWeight, $mainFont-color,
+                     $mainLineHeight, inherit, center);
+    &:hover {
+      color: $highlightFont-color;
+    }
+  }
+}
+// --------MAIN--------
+// hero
+.hero {
+  padding: 20px 0;
+  height: 75vh;
+  .wrapper {
+    @include flex(flex, row, space-between, unset);
+  }
+}
+// hero slider
+.hero__slider {
+  position: relative;
+  width: 66.66%;
+  img {
+    width: 100%;
+  }
+}
+// Two images in hero
+.hero__imgs {
+  width: 32%;
+  @include flex(flex, column, space-between, unset);
+}
+.hero__imgs-item {
+  position: relative;
+  .content {
+    width: 80%;
+    h3 {
+      font-size: 20px;
+      span {
+        border: none;
+      }
+    }
+    p {
+      &::after {
+        content: "";
+        display: block;
+        height: 1px;
+        width: 30px;
+        background-color: #ffffff;
+        margin-top: 10px;
+      }
+    }
+  }
+  img {
+    width: 100%;
+  }
+}
+// slide number
+.num-slide {
+  @include absolutePosition(absolute, 9%, 50%, unset, unset, none);
+  @include setFont(inherit, 24px, inherit, $default-color,
+                   inherit, inherit, inherit);
+  p {
+    position: relative;
+    .slash {
+      @include absolutePosition(absolute, -20px, -5px, unset, unset, none);
+    }
+  }
+}
+// slide content
+.content {
+  width: 65%;
+  @include setFont(inherit, 30px, inherit, $default-color,
+                   inherit, inherit, inherit);
+  @include absolutePosition(absolute, 9%, unset, 15%, unset, none);
+  h3 {
+    display: inline-block;
+    margin-bottom: 25px;
+    span {
+      display: block;
+      border-bottom: 2px solid $highlight-color;
+    }
+  }
+  p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+}
+// slide pagination
+.pagination {
+  height: 70px;
+  @include flex(flex, column, space-between, center);
+  @include absolutePosition(absolute, unset, unset, 15%, 6%, translate(0, 0));
+}
+.pagination__item {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  border: 1px solid #ffffff;
+  &:nth-child(3) {
+    background-color: #ffffff;
+  }
+}
