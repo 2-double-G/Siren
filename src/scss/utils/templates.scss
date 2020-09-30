@@ -1,0 +1,30 @@
+// for "after" elements
+%after {
+    content: "";
+    display: block;
+}
+%width100 {
+    img { width: 100%; }
+}
+// for articles
+%article {
+  background-color: $default-color;
+  position: relative;
+  cursor: pointer;
+  %width100
+  &::after {
+    @include setAfterElemStyle(0, 3px, $highlight-color);
+    @include absolutePosition(absolute, unset, unset, unset, unset, translate(0, -100%));
+    transition: 0.3s ease-in-out;
+  }
+  &:hover::after { width: 100%; }
+}
+// for all section headers 
+%header {
+  h2 {
+    @include setFont(inherit, 36px, 400, $titleFont-color, 2, inherit, start);
+    &::after {
+        @include setAfterElemStyle(80px, 2px, $highlight-color);
+    }
+  }
+}

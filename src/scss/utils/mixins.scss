@@ -12,12 +12,52 @@
     justify-content: $justify-content;
     align-items: $align-items;
 }
-@mixin setFont($font-family, $font-size, $font-weigh, $color, $line-height, $text-decoration, $text-align) {
+@mixin setFont($font-family, $font-size, $font-weigh, $color, $line-height, $text-transform, $text-align) {
     font-family: $font-family;
     font-size: $font-size;
     font-weight: $font-weigh;
     line-height: $line-height;
     color: $color;
-    text-decoration: $text-decoration;
+    text-transform: $text-transform;
     text-align: $text-align;
+}
+@mixin setAfterElemStyle($width, $height, $background-color) {
+    @extend %after;
+    width: $width;
+    height: $height;
+    background-color: $background-color;
+}
+@mixin setContentStyle($text-width, $title-size, $title-margin, $text-size, $text-margin, $subtext-size) {
+    h3 { 
+        @include setFont($mainFont, $title-size, 400, $default-color, 1.2, inherit, start);
+        margin-bottom: $title-margin;
+     }
+    .text { 
+        @include setFont($subtitleFont, $text-size, 400, $default-color, 1.4, inherit, start);
+        margin-bottom: $text-margin;
+    }
+    .date { 
+        @include setFont($subtitleFont, $subtext-size, 400, $default-color, 1.4, uppercase, start);
+        span {padding: 0 7px }
+    }
+    width: $text-width;
+}
+@mixin setArticleStyle ($title-size, $title-margin, $text-size, $text-margin, $subtext-size) {
+    h3 { 
+        @include setFont($mainFont, $title-size, 400, $titleFont-color, 1.2, inherit, start);
+        margin-bottom: $title-margin;
+     }
+    .text { 
+        @include setFont($subtitleFont, $text-size, 400, $mainFont-color, 1.4, inherit, start);
+        margin-bottom: $text-margin;
+    }
+    .date { 
+        @include setFont($subtitleFont, $subtext-size, 400, $titleFont-color, 1.4, uppercase, start);
+        span {
+            color: $mainFont-color;
+            padding: 0 7px;
+          }
+        time { color: $mainFont-color; }
+    }
+    @extend %article;
 }
