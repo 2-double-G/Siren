@@ -1,0 +1,14 @@
+<svg id="Arrow_right_on" xmlns="http://www.w3.org/2000/svg" width="32.44" height="10.63" viewBox="0 0 32.44 10.63">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 1px;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Stroke_1" data-name="Stroke 1" class="cls-1" d="M1226,2431.31h31.38" transform="translate(-1226 -2426)"/>
+  <path id="Stroke_4" data-name="Stroke 4" class="cls-1" d="M1252.78,2436.27l4.96-4.96-4.96-4.96" transform="translate(-1226 -2426)"/>
+</svg>

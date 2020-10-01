@@ -61,3 +61,7 @@
     }
     @extend %article;
 }
+@mixin calculRatingBorder($rating) {
+    background-image: linear-gradient((90deg + (180deg * ($rating - 50) / 50deg)), transparent 50%, $highlight-color 50%),
+                    linear-gradient(90deg, #ffffff 50%, $highlight-color 50%);
+}

@@ -35,7 +35,7 @@ body {
 .nav {
   font-size: 18px;
   padding: 20px 0;
-  border-bottom: 1px solid $border-color;
+  @extend %border-gray;
   ul {
     @include flex(flex, row, center, center);
   }
@@ -128,6 +128,7 @@ body {
 }
 // the latest section
 .latest {
+  position: relative;
   @extend %header;
 }
 // for section background-color
@@ -136,7 +137,7 @@ body {
 }
 .latest__articles {
   padding: 50px 0 100px;
-  @include flex(flex, row, space-between, center);
+  @include flex(flex, row, space-between, normal);
   article {
     @include setArticleStyle(24px, 16px, inherit, 30px, 12px);
     width: 31.2%;
@@ -160,6 +161,13 @@ body {
 // slider in section "latest"
 .latest__slider {
   @include flex(flex, row, space-between, flex-end);
+  .arrows {
+    @include flex(flex, row, space-between, center);
+    @include absolutePosition(absolute, unset, unset, 1.5%, 32%, translate(-50%, -50%));
+    .arrow__left {
+      margin-right: 15px;
+    }
+  }
 }
 .latest__slider-item {
   &:nth-child(1) {width: 13%;}
@@ -184,4 +192,112 @@ body {
   .text {
     width: 50%;
   }
+}
+// section "reviews"
+.reviews {
+  padding: 75px 0;
+  @extend %header;
+}
+.reviews__articles {
+  margin-top: 50px;
+  @include flex(flex, row, space-between, stretch);
+}
+// big article
+.reviews__articles--big {
+  width: 49%;
+  @extend %border-gray;
+  @include flex(flex, column, space-between, stretch);
+  @include setArticleStyle(33px, 20px, 14px, inherit, 12px);
+  .reviews__articles-content {
+    height: 100%;
+    margin: 30px;
+    @include flex(flex, column, space-between, flex-start);
+  }
+}
+// mimi article
+.reviews__articles--mini { 
+  width: 48%; 
+  @include flex(flex, row, space-between, stretch);
+  flex-wrap: wrap;
+  article {
+    width: 48%;
+    height: 305px;
+    @extend %border-gray;
+    @include flex(flex, column, stretch, flex-start);
+    @include setArticleStyle(20px, 15px, 0, 0, 12px);
+    &:nth-child(1),
+    &:nth-child(2) {
+      margin-bottom: 20px;
+    }
+   }
+  .reviews__articles-content {
+    height: 100%;
+    margin: 15px;
+    @include flex(flex, column, space-between, flex-start);
+   }
+ }
+// rating circle
+.reviews__img,
+.inner-rating {
+  position: relative;
+}
+.rating {
+  width: 70px;
+  height: 70px;
+  z-index: 1;
+  @include absolutePosition(absolute, unset, 100%, unset, 5%, translate(0, -50%));
+}
+.inner,
+.circl-move {
+  width: 100%;
+  height: 100%;
+}
+.circl-move {
+  border-radius: 100%;
+  @include absolutePosition(absolute, 50%, 50%, unset, unset, translate(-50%, -50%));
+  // rating*10 => 6.4 * 10 = 64
+  @include calculRatingBorder(64);
+  @include flex(flex, column, center, center);
+}
+.circle-static {
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  background-color: #ffffff;
+  @include flex(flex, column, center, center);
+  @include setFont($subtitleFont, 20px, 600, $highlight-color, inherit, inherit, center);
+}
+.rating.--mini {
+  width: 40px;
+  height: 40px;
+  .circle-static {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+.reviews__articles--mini {
+  article {
+    &:nth-child(1) {
+      .circl-move {
+        @include calculRatingBorder(72);
+      }
+    }
+    &:nth-child(2) {
+      .circl-move {
+        @include calculRatingBorder(80);
+      }
+    }
+    &:nth-child(3) {
+      .circl-move {
+        @include calculRatingBorder(69);
+      }
+    }
+    &:nth-child(4) {
+      .circl-move {
+        @include calculRatingBorder(78);
+      }
+    }
+  }
+  
 }

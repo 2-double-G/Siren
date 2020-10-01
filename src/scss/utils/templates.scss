@@ -6,15 +6,18 @@
 %width100 {
     img { width: 100%; }
 }
+%border-gray {
+  border-bottom: 1px solid $border-color;
+}
 // for articles
 %article {
   background-color: $default-color;
   position: relative;
   cursor: pointer;
-  %width100
+  @extend %width100;
   &::after {
-    @include setAfterElemStyle(0, 3px, $highlight-color);
-    @include absolutePosition(absolute, unset, unset, unset, unset, translate(0, -100%));
+    @include setAfterElemStyle(0, 2px, $highlight-color);
+    @include absolutePosition(absolute, unset, 100%, unset, unset, translate(0, 0));
     transition: 0.3s ease-in-out;
   }
   &:hover::after { width: 100%; }
