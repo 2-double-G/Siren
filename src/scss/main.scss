@@ -405,6 +405,7 @@ body {
 }
 .articles {
   @extend %header;
+  padding-bottom: 50px;
 }
 .articles__block-artcles {
   width: 65%;
@@ -476,11 +477,9 @@ body {
     font-size: 24px;
     margin: 0;
   }
-  img {
-    width: 22.7%;
-  }
   article {
     padding: 20px 0;
+    margin-top: 1px;
     @extend %border-gray;
     @extend %afterBorder;
     @include articleStyle(18px, 90%, 15px, 100%);
@@ -495,7 +494,9 @@ body {
 }
 .article__top-first {
   border-top: 1px solid $border-color;
-  @extend %width100;
+  img {
+    width: 100%;
+  }
   .articles__content {
     padding-top: 20px;
     @include flex(flex, row, space-between, flex-start);
@@ -504,4 +505,66 @@ body {
 }
 .article__top-item {
   @include flex(flex, row, space-between, flex-start);
+
+  img {
+    width: 22.7%;
+  }
+}
+// section with fullscreen slider
+.fullscreen-slider {
+  height: 100vh;
+  position: relative;
+}
+.fullscreen-slider__inner {
+  .arrow__left,
+  .arrow__right {
+    position: absolute;
+    top: 55%;
+    z-index: 3;
+  }
+  .arrow__left {
+    left: 50px;
+  }
+  .arrow__right {
+    right: 50px;
+  }
+}
+.fullscreen-slider__item {
+  position: relative;
+  @include contentStyle(40px, 15px, 100%);
+  text-align: center;
+  address {
+    font-style: normal;
+    font-size: 16px;
+  }
+  h3 {
+    b {
+      font-weight: 500;
+    }
+  }
+  a {
+    display: inline-block;
+    color: $default-color;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 10px 45px;
+    border: 1px solid $default-color;
+    margin-top: 30px;
+    transition: color 0.3s linear, background-color 0.3s linear;
+    &:hover {
+      background-color: $default-color;
+      color: $titleFont-color;
+    }
+  }
+  img {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+  }
+  .content {
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
 }
