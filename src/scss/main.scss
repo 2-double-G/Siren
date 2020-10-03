@@ -5,8 +5,48 @@
 
 // --------DEFAULT--------
 body {
-  @include setFont( $mainFont, $mainFontSize, $mainFontWeight,
-                    $mainFont-color, $mainLineHeight, inherit, inherit );
+  @include setFont(
+    $mainFont,
+    $mainFontSize,
+    $mainFontWeight,
+    $mainFont-color,
+    $mainLineHeight,
+    inherit,
+    inherit
+  );
+}
+// content style with image background
+.content {
+  color: $default-color;
+  position: absolute;
+}
+// title style
+.title {
+  font-family: $mainFont;
+  color: $titleFont-color;
+}
+// date style
+.date {
+  font-family: $secondaryFont;
+  font-size: 12px;
+  text-transform: uppercase;
+  span {
+    padding: 0 7px;
+  }
+}
+// slide number
+.num-slide {
+  position: absolute;
+  @include Font($subtitleFont, 24px);
+  color: $default-color;
+  p {
+    position: relative;
+    .slash {
+      position: absolute;
+      left: -15px;
+      top: -5px;
+    }
+  }
 }
 // --------GRID--------
 .wrapper {
@@ -19,15 +59,18 @@ body {
 // header logo
 .logo {
   padding: 15px 0;
-  @include setFont( $logoFont, 50px, inherit, $logoFont-color, 
-                    inherit, inherit, center );
+  @include Font($logoFont, 50px);
+  color: $logoFont-color;
+  text-align: center;
   h1 {
     position: relative;
     display: inline-block;
     span {
       font-size: 12px;
-      @include absolutePosition( absolute, -13px, 50%, unset, unset, 
-                                 translate(-50%, -30%) rotate(-90deg) );
+      position: absolute;
+      left: -13px;
+      top: 50%;
+      transform: translate(-50%, -30%) rotate(-90deg);
     }
   }
 }
@@ -44,8 +87,9 @@ body {
 .nav__link {
   padding: 0 30px;
   a {
-    @include setFont( inherit, 18px, $mainFontWeight, $titleFont-color, 
-                      $mainLineHeight, inherit, center );
+    font-size: 18px;
+    color: $titleFont-color;
+    text-align: center;
     transition: color 0.2s linear;
     &:hover {
       color: $highlightFont-color;
@@ -57,7 +101,7 @@ body {
 .hero {
   padding: 40px 0;
   .wrapper {
-    @include flex(flex, row, space-between, unset);
+    @include flex(flex, row, space-between, flex-start);
   }
 }
 // hero slider
@@ -65,25 +109,18 @@ body {
   position: relative;
   width: 66.66%;
   @extend %width100;
-}
-// slide number
-.num-slide {
-  @include absolutePosition(absolute, 9%, 50%, unset, unset, none);
-  @include setFont(inherit, 24px, 600, $default-color, inherit, inherit, inherit);
-  p {
-    position: relative;
-    .slash {
-      @include absolutePosition(absolute, -15px, -5px, unset, unset, none);
-    }
+  .num-slide {
+    left: 9%;
+    top: 50%;
   }
 }
 // slide content
-.content {
-  @include setContentStyle(65%, 30px, 25px, inherit, 0, 12px);
-  @include absolutePosition(absolute, 9%, unset, 15%, unset, none);
-}
 .hero__slider-item {
   .content {
+    @include contentStyle(30px, 25px, 100%);
+    position: absolute;
+    left: 9%;
+    bottom: 15%;
     h3 {
       display: inline-block;
       span {
@@ -97,7 +134,9 @@ body {
 .pagination {
   height: 70px;
   @include flex(flex, column, space-between, center);
-  @include absolutePosition(absolute, unset, unset, 15%, 6%, translate(0, 0));
+  position: absolute;
+  bottom: 15%;
+  right: 6%;
 }
 .pagination__item {
   width: 10px;
@@ -111,12 +150,15 @@ body {
 // Two images in hero
 .hero__imgs {
   width: 32%;
+  align-self: stretch;
   @include flex(flex, column, space-between, unset);
 }
 .hero__imgs-item {
   position: relative;
-  .content { 
-  @include setContentStyle(80%, 20px, 30px, inherit, 0, 12px);
+  .content {
+    @include contentStyle(20px, 15px, 100%);
+    left: 10%;
+    bottom: 10%;
     p {
       &::after {
         @include setAfterElemStyle(30px, 1px, $default-color);
@@ -130,6 +172,9 @@ body {
 .latest {
   position: relative;
   @extend %header;
+  h2 {
+    margin: 0;
+  }
 }
 // for section background-color
 .latest__wrapper {
@@ -137,60 +182,79 @@ body {
 }
 .latest__articles {
   padding: 50px 0 100px;
-  @include flex(flex, row, space-between, normal);
+  @include flex(flex, row, space-between, flex-start);
   article {
-    @include setArticleStyle(24px, 16px, inherit, 30px, 12px);
+    @include articleStyle(24px, 100%, 16px, 100%);
     width: 31.2%;
   }
 }
 .latest__articles-content {
   padding: 30px;
+  min-height: 280px;
+  @include flex(flex, column, space-between, flex-start);
 }
 // play hover icon for images in articles
 .latest__img {
   position: relative;
-  &:hover .play { opacity: 1; }
+  &:hover .play {
+    opacity: 1;
+  }
 }
 .play {
   height: 70px;
   opacity: 0;
-  @include absolutePosition( absolute, 50%, 50%, unset,
-                             unset, translate(-50%, -50%) );
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   transition: opacity 0.2s linear;
 }
 // slider in section "latest"
+.arrows {
+  @include flex(flex, row, space-between, center);
+  position: absolute;
+  bottom: 1.5%;
+  right: 32%;
+  transform: translate(-50%, -50%);
+  .arrow__left {
+    margin-right: 15px;
+  }
+}
 .latest__slider {
   @include flex(flex, row, space-between, flex-end);
   .arrows {
-    @include flex(flex, row, space-between, center);
-    @include absolutePosition(absolute, unset, unset, 1.5%, 32%, translate(-50%, -50%));
+    bottom: 1.5%;
+    right: 32%;
     .arrow__left {
       margin-right: 15px;
     }
   }
 }
 .latest__slider-item {
-  &:nth-child(1) {width: 13%;}
-  &:nth-child(2) {width: 55%;}
-  &:nth-child(3) {width: 30%;}
+  &:nth-child(1) {
+    width: 13%;
+  }
+  &:nth-child(2) {
+    width: 55%;
+  }
+  &:nth-child(3) {
+    width: 30%;
+  }
   @extend %width100;
   position: relative;
 }
-.num-slide--latest {
-  @include setFont($subtitleFont, 20px, 600, $default-color, inherit, none, start);
-  margin-bottom: 5px;
-  p {
-    position: relative;
-    .slash {
-      @include absolutePosition(absolute, -15px, -5px, unset, unset, none);
-    }
-  }
-}
 .latest__slider-content {
-  @include absolutePosition(absolute, 20%, unset, 13%, unset, translate(0, 0));
-  @include setContentStyle(100%, 30px, 15px, 12px, 50px, 10px);
+  left: 20%;
+  bottom: 13%;
+  color: $default-color;
+  @include contentStyle(30px, 14px, 100%);
   .text {
-    width: 50%;
+    width: 80%;
+    margin-bottom: 30px;
+  }
+  .num-slide {
+    position: static;
+    margin-bottom: 5px;
   }
 }
 // section "reviews"
@@ -199,7 +263,6 @@ body {
   @extend %header;
 }
 .reviews__articles {
-  margin-top: 50px;
   @include flex(flex, row, space-between, stretch);
 }
 // big article
@@ -207,16 +270,18 @@ body {
   width: 49%;
   @extend %border-gray;
   @include flex(flex, column, space-between, stretch);
-  @include setArticleStyle(33px, 20px, 14px, inherit, 12px);
+  @include articleStyle(33px, 100%, 20px, 80%);
   .reviews__articles-content {
+    width: 80%;
     height: 100%;
     margin: 30px;
+    margin-bottom: 15px;
     @include flex(flex, column, space-between, flex-start);
   }
 }
 // mimi article
-.reviews__articles--mini { 
-  width: 48%; 
+.reviews__articles--mini {
+  width: 48%;
   @include flex(flex, row, space-between, stretch);
   flex-wrap: wrap;
   article {
@@ -224,18 +289,19 @@ body {
     height: 305px;
     @extend %border-gray;
     @include flex(flex, column, stretch, flex-start);
-    @include setArticleStyle(20px, 15px, 0, 0, 12px);
+    @include articleStyle(20px, 100%, 15px, 100%);
     &:nth-child(1),
     &:nth-child(2) {
       margin-bottom: 20px;
     }
-   }
+  }
   .reviews__articles-content {
     height: 100%;
+    width: 80%;
     margin: 15px;
     @include flex(flex, column, space-between, flex-start);
-   }
- }
+  }
+}
 // rating circle
 .reviews__img,
 .inner-rating {
@@ -245,7 +311,14 @@ body {
   width: 70px;
   height: 70px;
   z-index: 1;
-  @include absolutePosition(absolute, unset, 100%, unset, 5%, translate(0, -50%));
+  @include absolutePosition(
+    absolute,
+    unset,
+    100%,
+    unset,
+    5%,
+    translate(0, -50%)
+  );
 }
 .inner,
 .circl-move {
@@ -254,7 +327,14 @@ body {
 }
 .circl-move {
   border-radius: 100%;
-  @include absolutePosition(absolute, 50%, 50%, unset, unset, translate(-50%, -50%));
+  @include absolutePosition(
+    absolute,
+    50%,
+    50%,
+    unset,
+    unset,
+    translate(-50%, -50%)
+  );
   // rating*10 => 6.4 * 10 = 64
   @include calculRatingBorder(64);
   @include flex(flex, column, center, center);
@@ -265,7 +345,15 @@ body {
   border-radius: 100%;
   background-color: #ffffff;
   @include flex(flex, column, center, center);
-  @include setFont($subtitleFont, 20px, 600, $highlight-color, inherit, inherit, center);
+  @include setFont(
+    $subtitleFont,
+    20px,
+    600,
+    $highlight-color,
+    inherit,
+    inherit,
+    center
+  );
 }
 .rating.--mini {
   width: 40px;
@@ -299,5 +387,121 @@ body {
       }
     }
   }
-  
+}
+// latest articles
+// banner
+.aside {
+  width: 31%;
+  position: absolute;
+  left: 100%;
+  transform: translate(-100%, 0);
+}
+.aside__img {
+  padding: 40px;
+  border: 1px solid #d4d4d4;
+}
+.articles-inner {
+  position: relative;
+}
+.articles {
+  @extend %header;
+}
+.articles__block-artcles {
+  width: 65%;
+  margin-bottom: 100px;
+  img {
+    width: 32.6%;
+  }
+  article {
+    padding: 30px;
+    margin-bottom: 1px;
+    @extend %border-gray;
+    @extend %afterBorder;
+    @include articleStyle(24px, 80%, 10px, 80%);
+    .text {
+      margin-bottom: 10px;
+    }
+    @include flex(flex, row, space-between, stretch);
+    &:first-child {
+      border-top: 1px solid $border-color;
+    }
+    &::after {
+      left: 0px;
+    }
+  }
+}
+.articles__content {
+  width: 62%;
+  @include flex(flex, column, space-between, flex-start);
+}
+// latest articles slider
+.article__block-slider {
+  width: 65%;
+  position: relative;
+  .num-slide {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    z-index: 5;
+  }
+  .arrow__left,
+  .arrow__right {
+    position: absolute;
+    top: 55%;
+  }
+  .arrow__left {
+    left: 50px;
+  }
+  .arrow__right {
+    right: 50px;
+  }
+}
+.articles__slider-item {
+  .content {
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0);
+    @include contentStyle(30px, 10px, 500px);
+  }
+}
+// top posts
+.article__top {
+  width: 31%;
+  position: absolute;
+  left: 100%;
+  top: 100%;
+  transform: translate(-100%, -100%);
+  h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  img {
+    width: 22.7%;
+  }
+  article {
+    padding: 20px 0;
+    @extend %border-gray;
+    @extend %afterBorder;
+    @include articleStyle(18px, 90%, 15px, 100%);
+  }
+}
+.post-num {
+  @include Font($subtitleFont, 64px);
+  font-weight: 700;
+  color: $sectionLatest-color;
+  line-height: 1;
+  display: block;
+}
+.article__top-first {
+  border-top: 1px solid $border-color;
+  @extend %width100;
+  .articles__content {
+    padding-top: 20px;
+    @include flex(flex, row, space-between, flex-start);
+    width: 100%;
+  }
+}
+.article__top-item {
+  @include flex(flex, row, space-between, flex-start);
 }

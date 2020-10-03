@@ -21,38 +21,40 @@
     text-transform: $text-transform;
     text-align: $text-align;
 }
+
 @mixin setAfterElemStyle($width, $height, $background-color) {
     @extend %after;
     width: $width;
     height: $height;
     background-color: $background-color;
 }
-@mixin setContentStyle($text-width, $title-size, $title-margin, $text-size, $text-margin, $subtext-size) {
-    h3 { 
-        @include setFont($mainFont, $title-size, 400, $default-color, 1.2, inherit, start);
-        margin-bottom: $title-margin;
-     }
-    .text { 
-        @include setFont($subtitleFont, $text-size, 400, $default-color, 1.4, inherit, start);
-        margin-bottom: $text-margin;
-    }
-    .date { 
-        @include setFont($subtitleFont, $subtext-size, 400, $default-color, 1.4, uppercase, start);
-        span {padding: 0 7px }
-    }
-    width: $text-width;
+@mixin calculRatingBorder($rating) {
+    background-image: linear-gradient((90deg + (180deg * ($rating - 50) / 50deg)), transparent 50%, $highlight-color 50%),
+                    linear-gradient(90deg, #ffffff 50%, $highlight-color 50%);
 }
-@mixin setArticleStyle ($title-size, $title-margin, $text-size, $text-margin, $subtext-size) {
-    h3 { 
-        @include setFont($mainFont, $title-size, 400, $titleFont-color, 1.2, inherit, start);
+// --------------------
+@mixin Font($font-family, $font-size) {
+    font-family: $font-family;
+    font-size: $font-size;
+}
+@mixin contentStyle($title-size, $title-margin, $title-width) {
+    h3 {
+        font-size: $title-size;
         margin-bottom: $title-margin;
-     }
-    .text { 
-        @include setFont($subtitleFont, $text-size, 400, $mainFont-color, 1.4, inherit, start);
-        margin-bottom: $text-margin;
+        width: $title-width;
     }
-    .date { 
-        @include setFont($subtitleFont, $subtext-size, 400, $titleFont-color, 1.4, uppercase, start);
+}
+@mixin articleStyle($title-size, $title-width, $title-margin, $text-width) {
+    h3 {
+        font-size: $title-size;
+        width: $title-width;
+        margin-bottom: $title-margin;
+    }
+    .text {
+        width: $text-width;
+    }
+    .date {
+        color: $titleFont-color;
         span {
             color: $mainFont-color;
             padding: 0 7px;
@@ -60,8 +62,4 @@
         time { color: $mainFont-color; }
     }
     @extend %article;
-}
-@mixin calculRatingBorder($rating) {
-    background-image: linear-gradient((90deg + (180deg * ($rating - 50) / 50deg)), transparent 50%, $highlight-color 50%),
-                    linear-gradient(90deg, #ffffff 50%, $highlight-color 50%);
 }
