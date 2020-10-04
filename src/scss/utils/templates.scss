@@ -17,6 +17,7 @@
 }
 %afterBorder {
   &::after {
+    @extend %after;
     @include setAfterElemStyle(0, 2px, $highlight-color);
     position: absolute;
     top: 100%;
@@ -28,7 +29,11 @@
 // for all section headers 
 %header {
   h2 {
-    @include setFont(inherit, 36px, 400, $titleFont-color, 2, inherit, start);
+    @include adaptiv-font(36, 24);
+    font-weight: 400;
+    line-height: 2;
+    text-align: start;
+    color: $titleFont-color;
     margin-bottom: 50px;
     &::after {
         @include setAfterElemStyle(80px, 2px, $highlight-color);
