@@ -1,65 +1,79 @@
 @mixin absolutePosition($position, $left, $top, $bottom, $right, $transform) {
-    position: $position;
-    left: $left;
-    top: $top;
-    bottom: $bottom;
-    right: $right;
-    transform: $transform;
+  position: $position;
+  left: $left;
+  top: $top;
+  bottom: $bottom;
+  right: $right;
+  transform: $transform;
 }
 @mixin flex($display, $flex-direction, $justify-content, $align-items) {
-    display: $display;
-    flex-direction: $flex-direction;
-    justify-content: $justify-content;
-    align-items: $align-items;
+  display: $display;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }
-@mixin setFont($font-family, $font-size, $font-weigh, $color, $line-height, $text-transform, $text-align) {
-    font-family: $font-family;
-    font-size: $font-size;
-    font-weight: $font-weigh;
-    line-height: $line-height;
-    color: $color;
-    text-transform: $text-transform;
-    text-align: $text-align;
+@mixin setFont(
+  $font-family,
+  $font-size,
+  $font-weigh,
+  $color,
+  $line-height,
+  $text-transform,
+  $text-align
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weigh;
+  line-height: $line-height;
+  color: $color;
+  text-transform: $text-transform;
+  text-align: $text-align;
 }
 
 @mixin setAfterElemStyle($width, $height, $background-color) {
-    @extend %after;
-    width: $width;
-    height: $height;
-    background-color: $background-color;
+  @extend %after;
+  width: $width;
+  height: $height;
+  background-color: $background-color;
 }
 @mixin calculRatingBorder($rating) {
-    background-image: linear-gradient((90deg + (180deg * ($rating - 50) / 50deg)), transparent 50%, $highlight-color 50%),
-                    linear-gradient(90deg, #ffffff 50%, $highlight-color 50%);
+  background-image: linear-gradient(
+      (90deg + (180deg * ($rating - 50) / 50deg)),
+      transparent 50%,
+      $highlight-color 50%
+    ),
+    linear-gradient(90deg, #ffffff 50%, $highlight-color 50%);
 }
 // --------------------
 @mixin Font($font-family, $font-size) {
-    font-family: $font-family;
-    font-size: $font-size;
+  font-family: $font-family;
+  font-size: $font-size;
 }
 @mixin contentStyle($title-size, $title-margin, $title-width) {
-    h3 {
-        font-size: $title-size;
-        margin-bottom: $title-margin;
-        width: $title-width;
-    }
+  h3 {
+    font-size: $title-size;
+    margin-bottom: $title-margin;
+    width: $title-width;
+  }
 }
 @mixin articleStyle($title-size, $title-width, $title-margin, $text-width) {
-    h3 {
-        font-size: $title-size;
-        width: $title-width;
-        margin-bottom: $title-margin;
+  h3 {
+    font-size: $title-size;
+    width: $title-width;
+    margin-bottom: $title-margin;
+  }
+  .text {
+    width: $text-width;
+  }
+  .date {
+    color: $titleFont-color;
+    span {
+      color: $mainFont-color;
+      padding: 0 7px;
     }
-    .text {
-        width: $text-width;
+    time {
+      color: $mainFont-color;
     }
-    .date {
-        color: $titleFont-color;
-        span {
-            color: $mainFont-color;
-            padding: 0 7px;
-          }
-        time { color: $mainFont-color; }
-    }
-    @extend %article;
+  }
+  @extend %article;
 }
