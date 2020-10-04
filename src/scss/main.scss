@@ -500,6 +500,15 @@ body {
   line-height: 1;
   display: block;
 }
+.article__top-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .article__top-img {
+    margin-right: 1.66em;
+    @include calcWidth(100px, 440px, $padding: false);;
+  }
+}
 .article__top-first {
   border-top: 1px solid $border-color;
   .article__top-content {
@@ -509,16 +518,7 @@ body {
   }
   .article__top-img {
     @extend %width100;
-    @include calcWidth(440px, $maxWidth, $padding: true);
-  }
-}
-.article__top-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  .article__top-img {
-    margin-right: 1.66em;
-    @include calcWidth(100px, 440px, $padding: false);;
+    width: 100%;
   }
 }
 // section with fullscreen slider
