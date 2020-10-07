@@ -30,19 +30,22 @@ body {
   position: relative;
   color: $default-color;
   margin-bottom: 0.8em;
-  @include adaptiv-font(24, 18);
+  @include adaptiv-font(24, 12);
   @include Font($subtitleFont, 24px);
   .slash {
     position: absolute;
     left: -15px;
     top: -5px;
+    @include smPhones {
+      left: -10px;
+    }
   }
 }
 .content {
   display: flex;
   flex-direction: column;
   .tiitle {
-    flex: 0 auto;
+    flex: 0 1 auto;
   }
   .text {
     flex: 1 0 auto;
@@ -85,17 +88,29 @@ body {
   ul {
     @include flex(flex, row, center, center);
   }
+  &__link {
+    padding: 0 1.6em;
+    a {
+      @include adaptiv-font(18, 14);
+      color: $titleFont-color;
+      text-align: center;
+      transition: color 0.2s linear;
+      &:hover {
+        color: $highlightFont-color;
+      }
+    }
+  }
 }
-// navbar links
-.nav__link {
-  padding: 0 30px;
-  a {
-    @include adaptiv-font(18, 14);
-    color: $titleFont-color;
-    text-align: center;
-    transition: color 0.2s linear;
-    &:hover {
-      color: $highlightFont-color;
+.header {
+  .logo {
+    @include smTablets {
+      text-align: start;
+      margin-left: 20px;
+    }
+  }
+  .nav {
+    @include smTablets {
+      display: none;
     }
   }
 }
@@ -103,28 +118,79 @@ body {
 // hero section
 .hero {
   padding: 40px 0;
+  @include smTablets {
+    padding: 0 0 30px;
+  }
+  .date {
+    @include adaptiv-font(12, 10);
+  }
   .wrapper {
     @include flex(flex, row, space-between, flex-start);
+    flex-wrap: wrap;
   }
-}
-// hero slider
-.hero__slider {
-  position: relative;
-  @extend %width100;
-  @include calcWidth(940px, $maxWidth, $padding: true);
-}
-// slide content
-.hero__slider-content {
-  position: absolute;
-  left: 9%;
-  bottom: 15%;
-  color: $default-color;
-  @include contentStyle(36, 20, 1.5em, 100%);
-  h3 {
-    display: inline-block;
-    span {
-      display: block;
-      border-bottom: 2px solid $highlight-color;
+  &__slider {
+    position: relative;
+    @extend %width100;
+    @include calcWidth(940px, $maxWidth, $padding: true);
+    @include tablets {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    @include smPhones {
+      margin-bottom: 10px;
+    }
+  }
+  &__slider-content {
+    position: absolute;
+    left: 9%;
+    bottom: 15%;
+    color: $default-color;
+    @include contentStyle(36, 14, 1.5em, 100%);
+    h3 {
+      display: inline-block;
+      span {
+        display: block;
+        border-bottom: 2px solid $highlight-color;
+      }
+    }
+    .num-slide {
+      @include adaptiv-font(24, 14);
+    }
+  }
+  &__imgs {
+    align-self: stretch;
+    @include calcWidth(450px, $maxWidth, $padding: true);
+    @include flex(flex, column, space-between, unset);
+    flex-wrap: wrap;
+    @include tablets {
+      flex-direction: row;
+      width: 100%;
+    }
+  }
+  &__imgs-item {
+    @extend %width100;
+    position: relative;
+    @include tablets {
+      @include calcWidth(680px, $maxWidth, $padding: true);
+    }
+    @include smTablets {
+      width: 100%;
+    }
+    &:first-child {
+      margin-bottom: 15px;
+    }
+  }
+  &__imgs-content {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    color: $default-color;
+    @include contentStyle(24, 14, 0.83em, 100%);
+    p {
+      &::after {
+        @include setAfterElemStyle(30px, 1px, $default-color);
+        margin-top: 10px;
+      }
     }
   }
 }
@@ -135,70 +201,150 @@ body {
   position: absolute;
   bottom: 15%;
   right: 6%;
-}
-.pagination__item {
-  width: 10px;
-  height: 10px;
-  border-radius: 100%;
-  border: 1px solid #ffffff;
-  &:nth-child(3) {
-    background-color: #ffffff;
-  }
-}
-// Two images in hero
-.hero__imgs {
-  align-self: stretch;
-  @include calcWidth(450px, $maxWidth, $padding: true);
-  @include flex(flex, column, space-between, unset);
-}
-.hero__imgs-item {
-  @extend %width100;
-  position: relative;
-}
-.hero__imgs-content {
-  position: absolute;
-  left: 10%;
-  bottom: 10%;
-  color: $default-color;
-  @include contentStyle(24, 16, 0.83em, 100%);
-  p {
-    &::after {
-      @include setAfterElemStyle(30px, 1px, $default-color);
-      margin-top: 10px;
+  &__item {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 1px solid #ffffff;
+    &:nth-child(3) {
+      background-color: #ffffff;
     }
   }
 }
-// the latest section
+// "the latest" section
 .latest {
   position: relative;
   @extend %header;
   h2 {
     margin: 0;
   }
-}
-// for section background-color
-.latest__wrapper {
-  background-color: $sectionLatest-color;
-}
-.latest__articles {
-  padding: 50px 0 100px;
-  @extend %width100;
-  @include flex(flex, row, space-between, flex-start);
-  article {
-    @extend %afterBorder;
-    @include calcWidth(440px, $maxWidth, $padding: true);
-    @include articleStyle(24, 18, 100%, 0.83em, 100%);
+  // for section background-color
+  &__wrapper {
+    background-color: $sectionLatest-color;
   }
-}
-.latest__articles-content {
-  padding: 1.6em;
-  min-height: 280px;
-}
-// play hover icon for images in articles
-.latest__img {
-  position: relative;
-  &:hover .play {
-    opacity: 1;
+  &__articles {
+    padding: 50px 0 100px;
+    @extend %width100;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    @include tablets {
+      padding: 30px 0 50px;
+    }
+    @include smTablets {
+      justify-content: center;
+      padding: 30px 0;
+    }
+    article {
+      @extend %afterBorder;
+      @include flex(flex, column, stretch, stretch);
+      @include calcWidth(440px, $maxWidth, $padding: true);
+      @include articleStyle(24, 18, 100%, 0.83em, 100%);
+      @include smTablets {
+        max-width: 440px;
+        width: 100%;
+        &:nth-child(2) {
+          margin: 20px 0;
+        }
+      }
+      .text {
+        padding-bottom: 1.6em;
+      }
+    }
+  }
+  &__articles-content {
+    padding: 1.6em;
+    height: 100%;
+    min-height: 280px;
+    @include flex(flex, column, space-between, flex-start);
+    @include tablets {
+      justify-content: center;
+    }
+  }
+  // play hover icon for images in articles
+  &__img {
+    position: relative;
+    &:hover .play {
+      opacity: 1;
+    }
+  }
+  &__latest__slider {
+    width: 100%;
+    height: 100vh;
+  }
+  &__slider-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  &__inner-content {
+    @include flex(flex, row, space-between, flex-end);
+    @include tablets {
+      width: 150%;
+    }
+    .arrows {
+      bottom: 1.5%;
+      right: 32%;
+      &__left {
+        margin-right: 15px;
+      }
+    }
+  }
+  &__slider-item {
+    @include tablets {
+      img {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    &:nth-child(1) {
+      @include calcWidth(250px, 1920px, $padding: false);
+      @include tablets {
+        width: 25%;
+        margin-left: -25%;
+      }
+    }
+    &:nth-child(2) {
+      @include calcWidth(1060px, 1920px, $padding: false);
+      @include tablets {
+        width: 100%;
+      }
+    }
+    &:nth-child(3) {
+      @include calcWidth(590px, 1920px, $padding: false);
+      @include tablets {
+        width: 25%;
+      }
+    }
+    @extend %width100;
+    position: relative;
+  }
+  &__slider-content {
+    position: absolute;
+    left: 20%;
+    right: 5%;
+    bottom: 13%;
+    color: $default-color;
+    @include contentStyle(36, 18, 0.5em, 100%);
+    @include tablets {
+      bottom: 25%;
+      right: 20%;
+    }
+    h3 {
+      line-height: 1.2;
+    }
+    .num-slide {
+      @include adaptiv-font(24, 14);
+    }
+    .text {
+      width: 80%;
+      margin-bottom: 2em;
+      @include adaptiv-font(14, 12);
+    }
+    .date {
+      @include adaptiv-font(12, 10);
+    }
   }
 }
 .play {
@@ -213,6 +359,9 @@ body {
 // slider in section "latest"
 .arrows {
   @include flex(flex, row, space-between, center);
+  @include tablets {
+    right: 10%;
+  }
   position: absolute;
   bottom: 1.5%;
   right: 32%;
@@ -221,90 +370,101 @@ body {
     margin-right: 15px;
   }
 }
-.latest__slider {
-  @include flex(flex, row, space-between, flex-end);
-  .arrows {
-    bottom: 1.5%;
-    right: 32%;
-    .arrow__left {
-      margin-right: 15px;
-    }
-  }
-}
-.latest__slider-item {
-  &:nth-child(1) {
-    @include calcWidth(250px, 1920px, $padding: false);
-  }
-  &:nth-child(2) {
-    @include calcWidth(1060px, 1920px, $padding: false);
-  }
-  &:nth-child(3) {
-    @include calcWidth(590px, 1920px, $padding: false);
-  }
-  @extend %width100;
-  position: relative;
-}
-.latest__slider-content {
-  position: absolute;
-  left: 20%;
-  right: 5%;
-  bottom: 13%;
-  color: $default-color;
-  @include contentStyle(36, 20, 0.5em, 100%);
-  h3 {
-    line-height: 1.2;
-  }
-  .text {
-    width: 80%;
-    margin-bottom: 4em;
-    @include adaptiv-font(14, 12);
-  }
-}
 // section "reviews"
 .reviews {
   padding: 75px 0;
   @extend %header;
   @extend %width100;
-}
-.reviews__articles {
-  @include flex(flex, row, space-between, stretch);
-}
-// big article
-.reviews__articles--big {
-  @extend %border-gray;
-  @extend %afterBorder;
-  @include calcWidth(680px, $maxWidth, $padding: true);
-  @include flex(flex, column, space-between, stretch);
-  @include articleStyle(36, 24, 100%, 0.83em, 80%);
-  .reviews__articles-content {
-    height: 100%;
-    padding: 2.14em;
-    padding-bottom: 1.3em;
-    @include flex(flex, column, space-between, flex-start);
+  @include tablets {
+    padding: 55px 0;
   }
-}
-// mimi article
-.reviews__articles--mini {
-  @include calcWidth(680px, $maxWidth, $padding: true);
-  @include flex(flex, row, space-between, stretch);
-  flex-wrap: wrap;
-  article {
-    // min-height: 360px;
+  @include smTablets {
+    padding: 30px 0;
+  }
+  &__articles {
+    @include flex(flex, row, space-between, stretch);
+    flex-wrap: wrap;
+  }
+  // big article
+  &__articles--big {
     @extend %border-gray;
     @extend %afterBorder;
-    @include articleStyle(24, 16, 90%, 1.25em, 100%);
-    @include flex(flex, column, stretch, flex-start);
-    @include calcWidth(320px, 680px, $padding: false);
-    &:nth-child(1),
-    &:nth-child(2) {
+    @include calcWidth(680px, $maxWidth, $padding: true);
+    @include flex(flex, column, space-between, stretch);
+    @include articleStyle(36, 24, 100%, 0.83em, 80%);
+    .text {
+      padding-bottom: 1.6em;
+    }
+    @include tablets {
+      width: 100%;
       margin-bottom: 20px;
     }
+    @include smPhones {
+      @include articleStyle(24, 18, 100%, 0.83em, 100%);
+    }
+    .reviews__articles-content {
+      height: 100%;
+      padding: 2.14em;
+      padding-bottom: 1.3em;
+      @include flex(flex, column, space-between, flex-start);
+      @include tablets {
+        min-height: 250px;
+      }
+    }
   }
-}
-.reviews__articles-content {
-  padding: 1.6em;
-  height: 100%;
-  @include flex(flex, column, space-between, flex-start);
+  // mimi article
+  &__articles--mini {
+    @include calcWidth(680px, $maxWidth, $padding: true);
+    @include flex(flex, row, space-between, stretch);
+    flex-wrap: wrap;
+    @include tablets {
+      width: 100%;
+    }
+    @include phones {
+      flex-direction: column;
+      align-items: center;
+    }
+    article {
+      // min-height: 360px;
+      @extend %border-gray;
+      @extend %afterBorder;
+      @include articleStyle(24, 16, 90%, 1.25em, 100%);
+      @include flex(flex, column, stretch, flex-start);
+      @include calcWidth(320px, 680px, $padding: false);
+      article:nth-child(4) {
+        margin-bottom: 0;
+      }
+      &:nth-child(1),
+      &:nth-child(2) {
+        margin-bottom: 20px;
+      }
+      @include tablets {
+        width: 48%;
+      }
+      @include phones {
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 20px;
+        &:nth-child(4) {
+          margin-bottom: 0;
+        }
+      }
+      @include smPhones {
+        width: 100%;
+        max-width: 320px;
+        margin-bottom: 20px;
+        article:nth-child(4) {
+          margin-bottom: 0;
+        }
+        @include articleStyle(24, 18, 100%, 0.83em, 100%);
+      }
+    }
+  }
+  &__articles-content {
+    padding: 1.6em;
+    height: 100%;
+    @include flex(flex, column, space-between, flex-start);
+  }
 }
 // rating circle
 .reviews__img,
@@ -323,6 +483,10 @@ body {
     5%,
     translate(0, -50%)
   );
+  @include smPhones {
+    width: 40px;
+    height: 40px;
+  }
 }
 .inner,
 .circl-move {
@@ -354,6 +518,11 @@ body {
   font-weight: 600;
   color: $highlight-color;
   text-align: center;
+  @include smPhones {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
 }
 .rating.--mini {
   width: 40px;
@@ -391,390 +560,581 @@ body {
 // latest articles
 // banner
 .aside {
-  @include calcWidth(440px, $maxWidth, $padding: true);
-  position: absolute;
-  left: 100%;
-  transform: translate(-100%, 0);
+  @include laptop {
+    display: none;
+  }
   @extend %width100;
+  &__img {
+    padding: 40px;
+    border: 1px solid #d4d4d4;
+  }
 }
-.aside__img {
-  padding: 40px;
-  border: 1px solid #d4d4d4;
+.col-1 {
+  @include calcWidth(920px, $maxWidth, $padding: true);
 }
-.articles-inner {
-  position: relative;
+.col-2 {
+  @include calcWidth(440px, $maxWidth, $padding: true);
+}
+.col-1,
+.col-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include laptop {
+    width: 100%;
+  }
 }
 .articles {
   @extend %header;
+  @extend %width100;
   padding-bottom: 50px;
-}
-.articles__posts {
-  margin-bottom: 100px;
-  @include calcWidth(920px, $maxWidth, $padding: true);
-  article {
-    padding: 2.1em;
-    margin-bottom: 1px;
-    @extend %border-gray;
-    @extend %afterBorder;
-    @include articleStyle(36, 20, 85%, 10px, 80%);
-    .text {
-      margin-bottom: 10px;
-    }
-    @include flex(flex, row, space-between, normal);
-    &:first-child {
-      border-top: 1px solid $border-color;
-    }
-    &::after {
-      left: 0px;
+  @include smTablets {
+    padding-bottom: 30px;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @include laptop {
+      flex-direction: column;
     }
   }
-}
-.articles__posts-img {
-  @include calcWidth(300px, 920px, $padding: false);
-  @extend %width100;
-}
-.articles__posts-content {
-  @include calcWidth(880px, $maxWidth, $padding: true);
-}
-// latest articles slider
-.article__block-slider {
-  @include calcWidth(920px, $maxWidth, $padding: true);
-  position: relative;
-  @extend %width100;
-  .num-slide {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -100%);
-    z-index: 5;
-  }
-  .arrow__left,
-  .arrow__right {
-    position: absolute;
-    top: 55%;
-  }
-  .arrow__left {
-    left: 50px;
-  }
-  .arrow__right {
-    right: 50px;
-  }
-}
-.articles__slider-item {
-  .content {
-    color: $default-color;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    text-align: center;
-    transform: translate(-50%, 0);
-    @include contentStyle(36, 30, 10px, 500px);
-  }
-}
-// top posts
-.article__top {
-  @include calcWidth(440px, $maxWidth, $padding: true);
-  position: absolute;
-  left: 100%;
-  top: 100%;
-  transform: translate(-100%, -100%);
-  h2 {
-    @include adaptiv-font(24, 18);
-    margin: 0;
-    &::after {
-      transform: translate(0, 50%);
+  &__posts {
+    @include laptop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    @include phones {
+      justify-content: center;
+    }
+    article {
+      padding: 2.1em;
+      margin-bottom: 1px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      @extend %border-gray;
+      @extend %afterBorder;
+      @include articleStyle(28, 20, 85%, 10px, 70%);
+      @include laptop {
+        width: 48%;
+        flex-direction: column;
+        justify-content: stretch;
+        padding: 0;
+        h3,
+        .text {
+          width: 100%;
+        }
+        &:nth-child(1),
+        &:nth-child(2) {
+          margin-bottom: 20px;
+        }
+      }
+      @include phones {
+        max-width: 300px;
+        width: 100%;
+      }
+      @include smPhones {
+        @include articleStyle(24, 18, 100%, 0.83em, 100%);
+      }
+      @include articleStyle(24, 18, 100%, 0.83em, 100%);
+      .text {
+        margin-bottom: 10px;
+      }
+      &:first-child {
+        border-top: 1px solid $border-color;
+      }
+      &::after {
+        left: 0px;
+      }
     }
   }
-  article {
-    padding: 1.6em 0;
-    margin-top: 1px;
-    @extend %border-gray;
-    @extend %afterBorder;
-    @include articleStyle(24, 16, 97%, 1.125em, 80%);
+  &__posts-img {
+    @include calcWidth(300px, 920px, $padding: false);
+    @extend %width100;
+    @include laptop {
+      width: 100%;
+    }
+  }
+  &__posts-content {
+    @include calcWidth(880px, $maxWidth, $padding: true);
+    @include laptop {
+      height: 100%;
+      width: 100%;
+      padding: 1.6em;
+    }
+  }
+  // latest articles slider
+  &__slider {
+    position: relative;
+    @extend %width100;
+    .num-slide {
+      display: inline-block;
+      @include adaptiv-font(24, 18);
+    }
+    .arrow__left,
+    .arrow__right {
+      position: absolute;
+      top: 55%;
+    }
+    .arrow__left {
+      left: 25px;
+    }
+    .arrow__right {
+      right: 25px;
+    }
+    @include laptop {
+      width: 100%;
+    }
+    @include tablets {
+      height: 100vh;
+      margin-bottom: 30px;
+    }
+  }
+  &__slider-item {
+    @include tablets {
+      img {
+        height: 100vh;
+        object-fit: cover;
+      }
+    }
+    .articles__slider-content {
+      color: $default-color;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      transform: translate(-50%, -25%);
+      @include contentStyle(36, 20, 10px, 500px);
+      @include laptop {
+        h1,
+        .text {
+          width: 60vw;
+        }
+      }
+      @include smTablets {
+        top: 60%;
+        @include contentStyle(26, 18, 10px, 300px);
+      }
+    }
+  }
+  // top posts
+  &__top {
+    h2 {
+      @include adaptiv-font(24, 18);
+      margin: 30px 0 0;
+      &::after {
+        transform: translate(0, 50%);
+      }
+    }
+    article {
+      padding: 1.6em 0;
+      margin-top: 1px;
+      @extend %border-gray;
+      @extend %afterBorder;
+      @include articleStyle(20, 16, 100%, 1.125em, 80%);
+    }
+  }
+  &__top-block {
+    @include laptop {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+  &__top-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .articles__top-img {
+      @include calcWidth(100px, 440px, $padding: false);
+    }
+  }
+  &__top-first {
+    border-top: 1px solid $border-color;
+    position: relative;
+    .articles__top-content {
+      div {
+        flex-basis: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      padding-top: 1.6em;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .articles__top-img {
+      @extend %width100;
+      width: 100%;
+    }
+    @include laptop {
+      width: 48%;
+      .date {
+        position: absolute;
+        top: 100%;
+        transform: translate(0, -100%) translate(0, -1.6em);
+      }
+    }
+    @include smTablets {
+      width: 100%;
+    }
+  }
+  &__top-mini {
+    @include laptop {
+      width: 48%;
+    }
+    @include smTablets {
+      width: 100%;
+    }
+  }
+  &__top-content {
+    flex-basis: 56%;
   }
 }
 .post-num {
   font-family: $subtitleFont;
-  @include adaptiv-font(72, 54);
+  @include adaptiv-font(72, 36);
   font-weight: 700;
   color: $sectionLatest-color;
   line-height: 1;
   display: block;
 }
-.article__top-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  .article__top-img {
-    margin-right: 1.66em;
-    @include calcWidth(100px, 440px, $padding: false);;
-  }
-}
-.article__top-first {
-  border-top: 1px solid $border-color;
-  .article__top-content {
-    padding-top: 1.6em;
-    width: 100%;
-    @include flex(flex, row, space-between, normal);
-  }
-  .article__top-img {
-    @extend %width100;
-    width: 100%;
-  }
-}
 // section with fullscreen slider
-.fullscreen-slider {
-  height: 100vh;
+.fullscreen {
+  display: flex;
+  min-height: 100vh;
   position: relative;
-}
-.fullscreen-slider__inner {
-  .arrow__left,
-  .arrow__right {
+  &__inner {
+    flex: 1 1 auto;
+    .arrow__left,
+    .arrow__right {
+      position: absolute;
+      top: 55%;
+      z-index: 3;
+    }
+    .arrow__left {
+      left: 50px;
+    }
+    .arrow__right {
+      right: 50px;
+    }
+  }
+  &__item {
+    position: relative;
+    @include contentStyle(64, 28, 0.3em, 80vw);
+    @include tablets {
+      h3 {
+        width: 70vw;
+      }
+    }
+    text-align: center;
+    address {
+      font-style: normal;
+      font-size: 16px;
+    }
+    h3 {
+      b {
+        font-weight: 500;
+      }
+    }
+    a {
+      display: inline-block;
+      color: $default-color;
+      @include adaptiv-font(16, 14);
+      text-transform: uppercase;
+      padding: 10px 45px;
+      border: 1px solid $default-color;
+      margin-top: 30px;
+      transition: color 0.3s linear, background-color 0.3s linear;
+      &:hover {
+        background-color: $default-color;
+        color: $titleFont-color;
+      }
+    }
+    img {
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__content {
     position: absolute;
-    top: 55%;
-    z-index: 3;
-  }
-  .arrow__left {
-    left: 50px;
-  }
-  .arrow__right {
-    right: 50px;
-  }
-}
-.fullscreen-slider__item {
-  position: relative;
-  @include contentStyle(64, 36, 0.3em, 80vw);
-  text-align: center;
-  address {
-    font-style: normal;
-    font-size: 16px;
-  }
-  h3 {
-    b {
-      font-weight: 500;
-    }
-  }
-  a {
-    display: inline-block;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
     color: $default-color;
-    @include adaptiv-font(16, 14);
-    text-transform: uppercase;
-    padding: 10px 45px;
-    border: 1px solid $default-color;
-    margin-top: 30px;
-    transition: color 0.3s linear, background-color 0.3s linear;
-    &:hover {
-      background-color: $default-color;
-      color: $titleFont-color;
+    @include smPhones {
+      top: 55%;
     }
   }
-  img {
-    height: 100vh;
-    width: 100%;
-    object-fit: cover;
-  }
-}
-.fullscreen-slider-content {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  color: $default-color;
 }
 // section "latest stories"
 .stories {
   padding: 50px 0;
   @extend %header;
-}
-.stories__articles {
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
-  padding: 40px 0;
-  @include flex(flex, row, stretch, stretch);
-  @include articleStyle(36, 20, 100%, 1.38em, 100%);
-  article {
-    @include calcWidth(480px, $maxWidth, $padding: true);
-    min-height: 440px;
-    padding: 1.4em 2.86em;
-    &:nth-child(2) {
-      border-left: 1px solid $border-color;
-      border-right: 1px solid $border-color;
-      h3 {
-        b {
-          font-weight: 400;
-          box-shadow: 0px 2px 0px 0px $highlightFont-color;
+  @include smTablets {
+    padding: 30px 0;
+  }
+  &__articles {
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    padding: 40px 0;
+    @include flex(flex, row, stretch, stretch);
+    @include articleStyle(36, 20, 100%, 1.38em, 100%);
+    @include laptop {
+      padding: 0;
+      flex-direction: column;
+      align-items: center;
+      border-top: none;
+      border-bottom: none;
+    }
+    article {
+      position: relative;
+      @include calcWidth(480px, $maxWidth, $padding: true);
+      min-height: 440px;
+      padding: 1.4em 2.86em;
+      @include smPhones {
+        padding: 1.4em 1.4em;
+      }
+      &:nth-child(2) {
+        border-left: 1px solid $border-color;
+        border-right: 1px solid $border-color;
+        @include laptop {
+          border-top: 1px solid $border-color;
+          border-bottom: 1px solid $border-color;
+        }
+        h3 {
+          b {
+            font-weight: 400;
+            box-shadow: 0px 2px 0px 0px $highlightFont-color;
+          }
         }
       }
-    }
-    .text {
-      b {
-        color: $titleFont-color;
-        font-weight: 600;
+      .text {
+        margin-bottom: 20px;
+        b {
+          color: $titleFont-color;
+          font-weight: 600;
+        }
+      }
+      @include laptop {
+        max-width: 500px;
+        width: 100%;
+        min-height: 300px;
+        border-left: 1px solid $border-color;
+        border-right: 1px solid $border-color;
       }
     }
   }
-}
-.stories__articles-content {
-  height: 100%;
-  @include flex(flex, column, space-between, flex-start);
-  a {
-    color: $highlightFont-color;
-    text-decoration: underline;
+  &__articles-content {
+    height: 100%;
+    @include flex(flex, column, space-between, flex-start);
+    a {
+      color: $highlightFont-color;
+      text-decoration: underline;
+    }
   }
 }
-// section "subscribe"
 
+// section "subscribe"
 .subscribe {
   padding: 50px 0;
+  @include smTablets {
+    padding: 25px 0;
+  }
+  background-color: $sectionLatest-color;
+  p {
+    margin-bottom: 2.5em;
+  }
   h2 {
     @include adaptiv-font(36, 24);
     color: $titleFont-color;
   }
-  background-color: $sectionLatest-color;
-}
-.subscribe-inner {
-  width: 100%;
-  max-width: 560px;
-  padding: 0 15px;
-  margin: 0 auto;
-  text-align: center;
-}
-.subscribe__form {
-  margin-top: 30px;
-  @include flex(flex, row, space-between, center);
-}
-.subscribe__input {
-  background-color: transparent;
-  font-family: $secondaryFont;
-  font-size: 14px;
-  border: 1px solid #9a9a9a;
-  padding: 10px 15px;
-  @include calcWidth(350px, 560px, $padding: false);
-}
-.subscribe__submit {
-  @include calcWidth(200px, 560px, $padding: false);
-  padding: 10px 0;
-  height: 10%;
-  font-size: 15px;
-  text-transform: uppercase;
-  color: $default-color;
-  background-color: $highlight-color;
-  transition: background-color 0.2s linear;
-  cursor: pointer;
-  &:hover {
-    background-color: $highlightFont-color;
+  &__inner {
+    width: 100%;
+    max-width: 560px;
+    padding: 0 15px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  &__form {
+    @include flex(flex, row, space-between, center);
+    flex-wrap: wrap;
+  }
+  &__input {
+    background-color: transparent;
+    font-family: $secondaryFont;
+    font-size: 14px;
+    border: 1px solid #9a9a9a;
+    padding: 10px 15px;
+    @include calcWidth(350px, 560px, $padding: false);
+    @include smTablets {
+      width: 100%;
+    }
+  }
+  &__submit {
+    @include calcWidth(200px, 560px, $padding: false);
+    @include smTablets {
+      width: 100%;
+      margin-top: 10px;
+    }
+    padding: 10px 0;
+    height: 10%;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: $default-color;
+    background-color: $highlight-color;
+    transition: background-color 0.2s linear;
+    cursor: pointer;
+    &:hover {
+      background-color: $highlightFont-color;
+    }
   }
 }
 // section "latest video"
 .video {
-  padding: 50px 0 100px;
   @extend %header;
   @extend %width100;
+  padding: 50px 0 100px;
+  @include laptop {
+    padding: 30px 0 30px;
+  }
+  background-color: $sectionVideo-color;
   h2 {
     color: $default-color;
   }
-  background-color: $sectionVideo-color;
-}
-.video__block {
-  @include flex(flex, row, space-between, flex-start);
-}
-.video__player {
-  @include calcWidth(920px, $maxWidth, $padding: true);
-  position: relative;
-  color: $default-color;
-  cursor: pointer;
-}
-.video__playlist {
-  width: 32%;
-  @include calcWidth(440px, $maxWidth, $padding: true);
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  border-top: 1px solid #4c4c4c;
-}
-.video__playlist-item {
-  flex-basis: 25%;
-  padding: 15px;
-  border-bottom: 1px solid #4c4c4c;
-  cursor: pointer;
-  position: relative;
-  transition: background-color 0.3s linear;
-  @include contentStyle(24, 18, 0, 80%);
-  @include flex(flex, column, space-between, flex-start);
-  h3 {
+  &__block {
+    @include flex(flex, row, space-between, flex-start);
+    @include laptop {
+      flex-direction: column;
+    }
+  }
+  &__player {
+    @include calcWidth(920px, $maxWidth, $padding: true);
+    @include laptop {
+      width: 100%;
+    }
+    position: relative;
     color: $default-color;
+    cursor: pointer;
   }
-}
-.video__playlist-item:hover,
-.video__playlist-item.--play {
-  background-color: $sectionVideoHover-color;
-}
-.video__playlist-item.--play {
-  &::after {
-    content: "";
+  &__playlist {
+    width: 32%;
+    @include calcWidth(440px, $maxWidth, $padding: true);
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    border-top: 1px solid #4c4c4c;
+    @include laptop {
+      width: 100%;
+      flex-direction: row;
+      margin-top: 30px;
+    }
+    @include laptop {
+      flex-direction: column;
+    }
+  }
+  &__playlist-item {
+    flex-basis: 25%;
+    padding: 15px;
+    border-bottom: 1px solid #4c4c4c;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s linear;
+    @include contentStyle(24, 18, 0, 80%);
+    @include flex(flex, column, space-between, flex-start);
+    @include laptop {
+      width: 25%;
+    }
+    @include laptop {
+      width: 100%;
+    }
+    h3 {
+      color: $default-color;
+      margin-bottom: 0.83em;
+    }
+  }
+  &__playlist-item:hover,
+  &__playlist-item.--play {
+    background-color: $sectionVideoHover-color;
+  }
+  &__playlist-item.--play {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      height: 2px;
+      width: 60%;
+      background-color: $highlight-color;
+    }
+  }
+  &__playlist-status {
+    width: 100px;
+    position: relative;
+    @include flex(flex, row, space-between, center);
+    img {
+      max-width: 18px;
+    }
+    p {
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+  &__playlist-time {
     position: absolute;
-    top: 100%;
-    left: 0;
-    height: 2px;
-    width: 60%;
-    background-color: $highlight-color;
-  }
-}
-.video__playlist-status {
-  width: 100px;
-  position: relative;
-  @include flex(flex, row, space-between, center);
-  img {
-    max-width: 18px;
-  }
-  p {
-    text-transform: uppercase;
+    right: 0;
+    bottom: 0;
+    transform: translate(-50%, -100%);
     font-size: 12px;
   }
-}
-.video__playlist-time {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  transform: translate(-50%, -100%);
-  font-size: 12px;
-}
-.video__player-tools {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 30px;
-  img {
-    max-width: 17px;
-  }
-  @include flex(flex, column, space-between, stretch);
-  opacity: 0;
-  transition: opacity 0.3s linear;
-  &:hover {
-    opacity: 1;
-  }
-}
-.video__player-header {
-  @include adaptiv-font(20, 14);
-}
-.video__player-header,
-.video__player-timeline {
-  @include flex(flex, row, space-between, center);
-}
-.video__player-timeline {
-  padding-top: 15px;
-  box-shadow: 0px -4px 0px 0px rgba(69, 69, 69, 0.3);
-  position: relative;
-  &::before {
-    content: "";
+  &__player-tools {
     position: absolute;
     top: 0;
-    transform: translate(0, -100%);
-    height: 4px;
-    width: 60%;
-    background-color: $highlight-color;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    img {
+      max-width: 17px;
+    }
+    @include flex(flex, column, space-between, stretch);
+    opacity: 0;
+    transition: opacity 0.3s linear;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &__player-header {
+    @include adaptiv-font(20, 14);
+  }
+  &__player-header,
+  &__player-timeline {
+    @include flex(flex, row, space-between, center);
+  }
+  &__player-timeline {
+    padding-top: 15px;
+    box-shadow: 0px -4px 0px 0px rgba(69, 69, 69, 0.3);
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      transform: translate(0, -100%);
+      height: 4px;
+      width: 60%;
+      background-color: $highlight-color;
+    }
   }
 }
 .timeline__left,
@@ -788,72 +1148,103 @@ body {
 // section "gallery"
 .gallery {
   background-color: #212121;
-}
-.gallery__slider {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-}
-.gallery__slider-item {
-  @include calcWidth(240px, 1920px, $padding: false);
-  img {
-    width: 100%;
-    opacity: 0.3;
+  &__slider {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
-}
-.gallery__slider-item.--on {
-  img {
-    width: 100%;
-    opacity: 1;
+  &__slider-item {
+    @include calcWidth(240px, 1920px, $padding: false);
+    @include laptop {
+      width: 25%;
+    }
+    @include phones {
+      width: 50%;
+    }
+    img {
+      width: 100%;
+      opacity: 0.3;
+    }
+    position: relative;
   }
-}
-.gallery__slider-content {
-  color: $default-color;
-  font-size: 12px;
-  font-family: $subtitleFont;
-  position: absolute;
-  bottom: 10px;
-  left: 51%;
-  width: 130px;
-  p {
-    width: 100px;
+  &__slider-item.--on {
+    img {
+      width: 100%;
+      opacity: 1;
+    }
   }
-  @include flex(flex, row, space-between, center);
-}
-// --------FOOTER--------
-.footer {
-  padding: 70px;
-  background-color: $sectionFooter-color;
-}
-.footer__nav {
-  padding-bottom: 100px;
-  border-bottom: 1px solid #282828;
-  a {
+  &__slider-content {
     color: $default-color;
-  }
-}
-.footer__socials {
-  margin: 50px 0;
-  ul {
-    @include flex(flex, row, center, center);
-    li {
-      border: 1px solid $mainFont-color;
-      border-radius: 100%;
-      width: 40px;
-      height: 40px;
-      margin-right: 20px;
-      &:last-child {
-        margin-right: 0;
-      }
-      @include flex(flex, row, center, center);
-      img {
-        max-height: 18px;
-        max-width: 18px;
-      }
+    font-size: 12px;
+    font-family: $subtitleFont;
+    position: absolute;
+    bottom: 10px;
+    left: 10%;
+    width: 100px;
+    p {
+      width: 100px;
+    }
+    img {
+      max-width: 18px;
     }
   }
 }
-.footer__copy {
-  font-size: 12px;
-  text-align: center;
+// --------FOOTER--------
+.footer {
+  padding: 70px 0;
+  background-color: $sectionFooter-color;
+  @include laptop {
+    padding: 30px 0;
+  }
+  &__nav {
+    padding-bottom: 100px;
+    border-bottom: 1px solid #282828;
+    @include laptop {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    @include tablets {
+      padding: 0;
+      ul {
+        flex-direction: column;
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+    a {
+      color: $default-color;
+    }
+  }
+  &__socials {
+    margin: 50px 0;
+    @include tablets {
+      margin: 25px 0;
+    }
+    ul {
+      @include flex(flex, row, center, center);
+      li {
+        border: 1px solid $mainFont-color;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+        @include phones {
+          margin-right: 5px
+        }
+        &:last-child {
+          margin-right: 0;
+        }
+        @include flex(flex, row, center, center);
+        img {
+          max-height: 18px;
+          max-width: 18px;
+        }
+      }
+    }
+  }
+  &__copy {
+    font-size: 12px;
+    text-align: center;
+  }
 }

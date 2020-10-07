@@ -29,12 +29,12 @@
 // for all section headers 
 %header {
   h2 {
-    @include adaptiv-font(36, 24);
+    @include adaptiv-font(36, 20);
     font-weight: 400;
     line-height: 2;
     text-align: start;
     color: $titleFont-color;
-    margin-bottom: 50px;
+    margin-bottom: 1.4em;
     &::after {
         @include setAfterElemStyle(80px, 2px, $highlight-color);
     }

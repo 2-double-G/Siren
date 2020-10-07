@@ -56,7 +56,7 @@
                     <div class="hero__imgs-item">
                         <img src="./img/hero/img-1.jpg" alt="">
                         <div class="hero__imgs-content">
-                            <h3>The SoundCloud <br> You Loved Is Doomed</h3>
+                            <h3>The SoundCloud You Loved Is Doomed</h3>
                             <p class="date">Music<span>/</span><time datetime="2017-08-21">August 21 2017</p>
                         </div>
                     </div>
@@ -110,27 +110,31 @@
                         </article>
                     </div>
                 </div>
-                <div class="latest__slider">
-                    <div class="latest__slider-item">
-                        <img src="./img/latest/slide_01.jpg" alt="">
-                        <div class="latest__slider-content"></div>
-                    </div>
-                    <div class="latest__slider-item">
-                        <img src="./img/latest/slide_02.jpg" alt="">
-                        <div class="latest__slider-content">
-                            <p class="num-slide">
-                                <span class="slash">/</span><span class="num-slide__value">02</span>
-                            </p>
-                            <h3>World's Best Hikes:<br>New Trails for a New Year</h3>
-                            <p class="text">
-                                Ready for a real New Year’s resolution? Why not commit to setting your feet on a brand-new long-distance hiking trail?
-                            </p>
-                            <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                <div class="latest__slider ">
+                    <div class="latest__slider-container">
+                        <div class="latest__inner-content">
+                            <div class="latest__slider-item">
+                                <img src="./img/latest/slide_01.jpg" alt="">
+                                <div class="latest__slider-content"></div>
+                            </div>
+                            <div class="latest__slider-item">
+                                <img src="./img/latest/slide_02.jpg" alt="">
+                                <div class="latest__slider-content">
+                                    <p class="num-slide">
+                                        <span class="slash">/</span><span class="num-slide__value">02</span>
+                                    </p>
+                                    <h3>World's Best Hikes:<br>New Trails for a New Year</h3>
+                                    <p class="text">
+                                        Ready for a real New Year’s resolution? Why not commit to setting your feet on a brand-new long-distance hiking trail?
+                                    </p>
+                                    <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                                </div>
+                            </div>
+                            <div class="latest__slider-item">                
+                                <img src="./img/latest/slide_03.jpg" alt="">
+                                <div class="latest__slider-content"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="latest__slider-item">                
-                        <img src="./img/latest/slide_03.jpg" alt="">
-                        <div class="latest__slider-content"></div>
                     </div>
                       
                     <div class="arrows">
@@ -260,13 +264,8 @@
         <section class="articles">
             <div class="wrapper">
                 <h2>Latest Articles</h2>
-                <div class="articles-inner">
-                    <!-- Banner -->
-                    <aside class="aside">
-                            <div class="aside__img">
-                                <img src="./img/articles/banner.jpg" alt="">
-                            </div>
-                    </aside>
+                <div class="articles__inner">
+                    <div class="col-1">
                         <div class="articles__posts">
                             <article>
                                 <div class="articles__posts-img">
@@ -319,10 +318,7 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="article__block-slider">
-                            <div class="num-slide">
-                                <p><span class="slash">/</span><span class="num-slide__value">02</span></p>
-                            </div>
+                        <div class="articles__slider">
                             <div class="arrow__left">
                                 <img src="./img/latest/arrow_left_off.svg" alt="">
                             </div>
@@ -333,81 +329,99 @@
                             <div class="articles__slider-item"></div>
                             <div class="articles__slider-item">
                                 <img src="./img/articles/slide-2.jpg" alt="">
-                                <div class="articles__slider-content content">
+                                <div class="articles__slider-content">
+                                    <div class="num-slide">
+                                        <p><span class="slash">/</span><span class="num-slide__value">02</span></p>
+                                    </div>
                                     <h3>The Top Handpicked Party Dresses For Vintage Girl</h3>
                                     <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                                 </div>
                             </div>
                             <div class="articles__slider-item"></div>
                         </div>
-                        <div class="article__top">
-                            <h2>Top Posts</h2>
-                            <article class="article__top-first">
-                                <div class="article__top-img">
-                                    <img src="./img/articles/post-1.jpg" alt="">
-                                </div>
-                                <div class="article__top-content">
-                                    <div>
-                                        <h3 class="title">This Visionary Exhibition Explores a Post-Urban</h3>
-                                        <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                    </div>
+                    <div class="col-2">
+                            <!-- Banner -->
+                            <aside class="aside">
+                                    <div class="aside__img">
+                                        <img src="./img/articles/banner.jpg" alt="">
                                     </div>
-                                    <span class="post-num">1</span>
+                            </aside>
+                            <div class="articles__top">
+                                <h2>Top Posts</h2>
+                                <div class="articles__top-block">
+                                    <article class="articles__top-first">
+                                        <div class="articles__top-img">
+                                            <img src="./img/articles/post-1.jpg" alt="">
+                                        </div>
+                                        <div class="articles__top-content">
+                                            <div>
+                                                <h3 class="title">This Visionary Exhibition Explores a Post-Urban</h3>
+                                                <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                                            </div>
+                                            <span class="post-num">1</span>
+                                        </div>
+                                    </article>
+                                    <div class="articles__top-mini">
+                                        <article class="articles__top-item">
+                                            <div class="articles__top-img">
+                                                <img src="./img/articles/post-2.jpg" alt="">
+                                            </div>
+                                            <div class="articles__top-content">
+                                                <h3 class="title">The Most Beautiful Highways for Trips</h3>
+                                                <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                                            </div>
+                                            <span class="post-num">2</span>
+                                        </article>
+                                        <article class="articles__top-item">
+                                            <div class="articles__top-img">
+                                                <img src="./img/articles/post-3.jpg" alt="">
+                                            </div>
+                                            <div class="articles__top-content">
+                                                <h3 class="title">Mechanisms from a piece of plastic</h3>
+                                                <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                                            </div>
+                                            <span class="post-num">3</span>
+                                        </article>
+                                        <article class="articles__top-item">
+                                            <div class="articles__top-img">
+                                                <img src="./img/articles/post-4.jpg" alt="">
+                                            </div>
+                                            <div class="articles__top-content">
+                                                <h3 class="title">Contemporary Canadian farmhouse</h3>
+                                                <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                                            </div>
+                                            <span class="post-num">4</span>
+                                        </article>
+                                    </div>
                                 </div>
-                            </article>
-                            <article class="article__top-item">
-                                <div class="article__top-img">
-                                    <img src="./img/articles/post-2.jpg" alt="">
-                                </div>
-                                <div class="article__top-content">
-                                    <h3 class="title">The Most Beautiful Highways for Trips</h3>
-                                    <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                                </div>
-                                <span class="post-num">2</span>
-                            </article>
-                            <article class="article__top-item">
-                                <div class="article__top-img">
-                                    <img src="./img/articles/post-3.jpg" alt="">
-                                </div>
-                                <div class="article__top-content">
-                                        <h3 class="title">Mechanisms from a piece of plastic</h3>
-                                    <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                                </div>
-                                <span class="post-num">3</span>
-                            </article>
-                            <article class="article__top-item">
-                                <div class="article__top-img">
-                                    <img src="./img/articles/post-2.jpg" alt="">
-                                </div>
-                                <div class="aarticle__top-content">
-                                        <h3 class="title">Contemporary Canadian farmhouse</h3>
-                                    <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                                </div>
-                                <span class="post-num">4</span>
-                            </article>
-                        </div>
+                            </div>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="fullscreen-slider">
-            <div class="fullscreen-slider__inner">
+        <section class="fullscreen">
+            <div class="fullscreen__inner">
                 <div class="arrow__left">
                     <img src="./img/latest/arrow_left_off.svg" alt="">
                 </div>
                 <div class="arrow__right">
                     <img src="./img/latest/arrow_right_on.svg" alt="">
                 </div>
-                <div class="fullscreen-slider__item">
-                    <img src="./img/fullscreen-slider/slide-1.jpg" alt="">
-                    <div class="fullscreen-slider-content">
-                        <address>by Jeremy D. Larson</address>
-                        <h3>Arcade Fire <b>Everything Now</b></h3>
-                        <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                        <a href="#">learn more</a>
+                <div class="fullscreen__slider">
+                    <div class="fullscreen__item">
+                        <img src="./img/fullscreen-slider/slide-1.jpg" alt="">
+                        <div class="fullscreen__content">
+                            <address>by Jeremy D. Larson</address>
+                            <h3>Arcade Fire <b>Everything Now</b></h3>
+                            <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                            <a href="#">learn more</a>
+                        </div>
                     </div>
+                    <div class="fullscreen__item"></div>
+                    <div class="fullscreen__item"></div>
                 </div>
             </div>
-            <div class="fullscreen-slider__item"></div>
-            <div class="fullscreen-slider__item"></div>
         </section>
         <section class="stories">
             <div class="wrapper">
@@ -444,7 +458,7 @@
             </div>
         </section>
         <section class="subscribe">
-            <div class="subscribe-inner">
+            <div class="subscribe__inner">
                 <h2>Subscribe</h2>
                 <p>Find out first about new and important news</p>
                 <form class="subscribe__form" action="">
@@ -506,10 +520,6 @@
         </section>
         <section class="gallery">
             <div class="gallery__slider">
-                <div class="gallery__slider-content">
-                    <p>Follow us on Instagram</p>
-                    <img src="./img/gallery/arrow.svg" alt="arrow right">
-                </div>
                 <div class="gallery__slider-item">
                     <img src="./img/gallery/slide-1.jpg" alt="slide 1">
                 </div>
@@ -522,8 +532,12 @@
                 <div class="gallery__slider-item">
                     <img src="./img/gallery/slide-4.jpg" alt="slide 4">
                 </div>
-                <div class="gallery__slider-item --on">
+                <div class="gallery__slider-item">
                     <img src="./img/gallery/slide-5.jpg" alt="slide 5">
+                    <!-- <div class="gallery__slider-content">
+                        <p>Follow us on Instagram</p>
+                        <img src="./img/gallery/arrow.svg" alt="arrow right">
+                    </div> -->
                 </div>
                 <div class="gallery__slider-item">
                     <img src="./img/gallery/slide-6.jpg" alt="slide 6">
