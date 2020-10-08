@@ -66,6 +66,9 @@ body {
   position: relative;
   background-color: $default-color;
   z-index: 15;
+  .nav {
+    background-color: $default-color;
+  }
   @include tablets {
     position: fixed;
     right: 0;
@@ -178,7 +181,6 @@ body {
 .nav {
   padding: 20px 0;
   @extend %border-gray;
-  background-color: $default-color;
   ul {
     @include flex(flex, row, center, center);
   }
