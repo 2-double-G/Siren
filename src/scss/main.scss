@@ -62,21 +62,114 @@ body {
   margin: 0 auto;
 }
 // --------HEADER--------
+.header {
+  position: relative;
+  background-color: $default-color;
+  z-index: 15;
+  @include tablets {
+    position: fixed;
+    right: 0;
+    top: -1px;
+    left: -1px;
+    min-height: 100px;
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .nav {
+      position: absolute;
+      right: 0;
+      top: 99px;
+      bottom: 0;
+
+      padding: 0;
+      width: 50%;
+      height: 90vh;
+      background-color: $default-color;
+
+      transform: translateX(100%);
+      transition: transform 0.35s ease-in;
+      opacity: 0;
+      &.--active {
+        opacity: 1;
+      }
+      ul {
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-around;
+      }
+    }
+    .nav__link {
+      opacity: 0;
+    }
+    .--active {
+      transform: translateX(0%);
+    }
+  }
+  &.--fixed {
+    position: fixed;
+    right: 0;
+    top: -1px;
+    left: -1px;
+    z-index: 1;
+    box-shadow: 0px 1px 10px 0px rgba(247, 129, 129, 0.5);
+    .wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .logo {
+      padding: 10px 0;
+      margin-left: 20px;
+      @include tablets {
+        margin-left: 0;
+      }
+    }
+    .nav {
+      border: none;
+    }
+  }
+  @include tabletsH {
+    .nav.--active {
+      height: 76vh;
+    }
+  }
+  @include smPhonesH {
+    .nav.--active {
+      height: 70vh;
+    }
+  }
+}
+
+// Animate links
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 // header logo
 .logo {
   padding: 15px 0;
-  font-family: $logoFont;
-  @include adaptiv-font(50, 30);
-  color: $logoFont-color;
   text-align: center;
+  font-family: $logoFont;
+  color: $logoFont-color;
+  @include adaptiv-font(50, 30);
   h1 {
     position: relative;
     display: inline-block;
     span {
       @include adaptiv-font(12, 10);
       position: absolute;
-      left: -13px;
       top: 50%;
+      left: -15px;
       transform: translate(-50%, -30%) rotate(-90deg);
     }
   }
@@ -85,39 +178,101 @@ body {
 .nav {
   padding: 20px 0;
   @extend %border-gray;
+  background-color: $default-color;
   ul {
     @include flex(flex, row, center, center);
   }
   &__link {
+    z-index: 2;
     padding: 0 1.6em;
     a {
-      @include adaptiv-font(18, 14);
-      color: $titleFont-color;
       text-align: center;
+      color: $titleFont-color;
       transition: color 0.2s linear;
+      @include adaptiv-font(18, 14);
       &:hover {
         color: $highlightFont-color;
       }
     }
   }
 }
-.header {
-  .logo {
-    @include smTablets {
-      text-align: start;
-      margin-left: 20px;
-    }
+// nav toggle
+.nav-toggle {
+  width: 30px;
+  padding: 10px 0;
+  display: none;
+
+  font-size: 0;
+  color: transparent;
+
+  border: 0;
+  background: none;
+  cursor: pointer;
+
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  z-index: 1;
+  @include tablets {
+    display: block;
   }
-  .nav {
-    @include smTablets {
-      display: none;
-    }
+  &:focus {
+    outline: 0;
+  }
+  &__item {
+    display: block;
+    width: 100%;
+    height: 3px;
+
+    background-color: $logoFont-color;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transition: background 0.2s linear;
+  }
+  &__item::before,
+  &__item::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+
+    background-color: $logoFont-color;
+
+    position: absolute;
+    left: 0;
+    z-index: 1;
+
+    transition: transform 0.2s linear;
+  }
+  &__item:before {
+    top: -8px;
+  }
+  &__item:after {
+    bottom: -8px;
+  }
+  &.--active &__item {
+    background: none;
+  }
+  &.--active &__item:before {
+    transform-origin: left top;
+    transform: rotate(45deg) translate3d(0px, -3px, 0);
+  }
+  &.--active &__item:after {
+    transform-origin: left bottom;
+    transform: rotate(-45deg) translate3d(0px, 3px, 0);
   }
 }
 // --------MAIN--------
 // hero section
 .hero {
   padding: 40px 0;
+  @include tablets {
+    padding-top: 100px;
+  }
   @include smTablets {
     padding: 0 0 30px;
   }
@@ -175,9 +330,9 @@ body {
     }
     @include smTablets {
       width: 100%;
-    }
-    &:first-child {
-      margin-bottom: 15px;
+      &:first-child {
+        margin-bottom: 15px;
+      }
     }
   }
   &__imgs-content {
@@ -475,14 +630,10 @@ body {
   width: 70px;
   height: 70px;
   z-index: 1;
-  @include absolutePosition(
-    absolute,
-    unset,
-    100%,
-    unset,
-    5%,
-    translate(0, -50%)
-  );
+  position: absolute;
+  top: 100%;
+  right: 5%;
+  transform: translate(0, -50%);
   @include smPhones {
     width: 40px;
     height: 40px;
@@ -495,14 +646,10 @@ body {
 }
 .circl-move {
   border-radius: 100%;
-  @include absolutePosition(
-    absolute,
-    50%,
-    50%,
-    unset,
-    unset,
-    translate(-50%, -50%)
-  );
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   // rating*10 => 6.4 * 10 = 64
   @include calculRatingBorder(64);
   @include flex(flex, column, center, center);
@@ -1230,7 +1377,7 @@ body {
         height: 40px;
         margin-right: 20px;
         @include phones {
-          margin-right: 5px
+          margin-right: 5px;
         }
         &:last-child {
           margin-right: 0;
