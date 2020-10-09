@@ -103,7 +103,7 @@
   }
  }
  @mixin smPhonesH {
-  @media screen and (max-height: 320px) {
+  @media screen and (max-height: 420px) {
       @content;
   }
 }

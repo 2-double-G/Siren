@@ -17,13 +17,13 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li class="nav__link"><a href="#">Features</a></li>
-                    <li class="nav__link"><a href="#">Fashion</a></li>
-                    <li class="nav__link"><a href="#">Music</a></li>
-                    <li class="nav__link"><a href="#">Design</a></li>
-                    <li class="nav__link"><a href="#">Travel</a></li>
-                    <li class="nav__link"><a href="#">Style</a></li>
-                    <li class="nav__link"><a href="#">People</a></li>
+                    <li class="nav__link"><a href="#" data-link="hero">Features</a></li>
+                    <li class="nav__link"><a href="#" data-link="stories">Fashion</a></li>
+                    <li class="nav__link"><a href="#" data-link="reviews">Music</a></li>
+                    <li class="nav__link"><a href="#" data-link="latest">Design</a></li>
+                    <li class="nav__link"><a href="#" data-link="articles">Travel</a></li>
+                    <li class="nav__link"><a href="#" data-link="video">Style</a></li>
+                    <li class="nav__link"><a href="#" data-link="gallery">People</a></li>
                 </ul>
             </nav>
             <button class="burger nav-toggle" id="nav-toggle">
@@ -36,24 +36,33 @@
             <div class="wrapper"> 
                 <div class="hero__slider">
                     <div class="pagination">
-                        <div class="pagination__item"></div>
-                        <div class="pagination__item"></div>
-                        <div class="pagination__item"></div>
-                        <div class="pagination__item"></div>
+                        <div class="pagination__item" data-slider_hero="hero__slide-01"></div>
+                        <div class="pagination__item --on" data-slider_hero="hero__slide-02"></div>
+                        <div class="pagination__item" data-slider_hero="hero__slide-03"></div>
+                        <div class="pagination__item" data-slider_hero="hero__slide-04"></div>
                     </div>
-                    <div class="hero__slider-item"></div>
-                    <div class="hero__slider-item">
-                        <img src="./img/hero/slider.jpg" alt="">
-                        <div class="hero__slider-content">
-                            <p class="num-slide">
-                                <span class="slash">/</span><span class="num-slide__value">02</span>
-                            </p>  
-                            <h3><span>Arizona Ultimate Adventure</span><span>– Grand Canyon & Beyond</span></h3>
-                            <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                        </div>
+                    <div class="hero__slider-content">
+                        <p class="num-slide">
+                            <span class="slash">/</span><span class="num-slide__value">02</span>
+                        </p>  
+                        <h3><span>Arizona Ultimate Adventure</span><span>– Grand Canyon & Beyond</span></h3>
+                        <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                     </div>
-                    <div class="hero__slider-item"></div>
-                    <div class="hero__slider-item"></div>
+                    <div class="hero__slider-item hero__slide-01">
+                        <img src="./img/hero/slide-1.jpg" alt="Grand Canyon slide №1">
+                    </div>
+                    <div class="hero__slider-item hero__slide-02 --on">
+                        <img src="./img/hero/slide-2.jpg" alt="Grand Canyon slide №2">
+                    </div>
+                    <div class="hero__slider-item hero__slide-03">
+                        <img src="./img/hero/slide-3.jpg" alt="Grand Canyon slide №3">
+                    </div>
+                    <div class="hero__slider-item hero__slide-04">
+                        <img src="./img/hero/slide-4.jpg" alt="Grand Canyon slide №4">
+                    </div>                
+                    <div class="hero__slider-mask">
+                        <img src="./img/hero/Mask.jpg" alt="Mask">
+                    </div>
                 </div>
                 <div class="hero__imgs">
                     <div class="hero__imgs-item">
