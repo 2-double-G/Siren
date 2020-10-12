@@ -120,18 +120,65 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }; // ---------Slider №2 in section "The Latest"---------
-  // const sliderLatest= () => {
-  //   const SLIDER = document.querySelector(".latest__inner-content"),
-  //         PREV = document.querySelector(".latest .arrow__left"),
-  //         NEXT = document.querySelector(".latest .arrow__right");
-  // }
 
+
+  var sliderLatest = function sliderLatest() {
+    var SLIDER_WIDTH = document.querySelector(".latest__slider").offsetWidth,
+        SLIDES = document.querySelectorAll(".latest__slider-item"),
+        SLIDER_CONT = document.querySelector(".latest__slider-container"),
+        PREV = document.querySelector(".latest .arrow__left"),
+        NEXT = document.querySelector(".latest .arrow__right");
+    var slidesWidth = [],
+        slidesWidthSum = 0,
+        offset = 0,
+        step = 1,
+        rest = 0; // Calculate width of each slide
+
+    SLIDES.forEach(function (item) {
+      slidesWidth.push(item.offsetWidth);
+      slidesWidthSum += item.offsetWidth;
+    });
+    offset = slidesWidth[0];
+    NEXT.addEventListener("click", function () {
+      rest = slidesWidthSum - SLIDER_WIDTH - (offset + slidesWidth[step]);
+
+      if (rest >= 0) {
+        offset += slidesWidth[step];
+        SLIDER_CONT.style.marginLeft = "-".concat(offset, "px");
+      } else {
+        SLIDER_CONT.style.marginLeft = "-".concat(slidesWidthSum - SLIDER_WIDTH, "px");
+      }
+
+      if (step + 1 == SLIDES.length) {
+        step = 0;
+        offset = 0;
+        SLIDER_CONT.style.marginLeft = "0px";
+      } else {
+        step++;
+      }
+    });
+    PREV.addEventListener("click", function () {
+      // Demo (very ugly realisation) (--need to fix that sht--)
+      if (step == 1) {
+        SLIDER_CONT.style.marginLeft = "".concat(0, "px");
+        step = 0;
+        offset = 0;
+      } else if (step == 2) {
+        SLIDER_CONT.style.marginLeft = "-".concat(slidesWidth[0], "px");
+        step = 1;
+      } else {
+        SLIDER_CONT.style.marginLeft = "-".concat(slidesWidthSum - SLIDER_WIDTH, "px");
+        step = 2;
+      }
+    });
+  };
 
   var app = function app() {
     navSlide();
     fixesNav();
     navigationLinks();
     sliderHero();
+    sliderLatest();
   };
 
   app();

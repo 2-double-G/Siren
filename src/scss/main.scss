@@ -380,6 +380,20 @@ body {
   }
 }
 // "the latest" section
+.play {
+  height: 70px;
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s linear;
+}
+// slider in section "latest"
+.arrows {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
 .latest {
   position: relative;
   @extend %header;
@@ -437,25 +451,22 @@ body {
       opacity: 1;
     }
   }
-  &__latest__slider {
-    width: 100%;
-    height: 100vh;
+  &__slider {
+    // width: 100%;
+    overflow-x: hidden;
+    @include tablets {
+      height: 100vh;
+    }
   }
   &__slider-container {
-    width: 100%;
-    overflow: hidden;
-  }
-  &__inner-content {
+    // width: 100%;
     @include flex(flex, row, space-between, flex-end);
     @include tablets {
-      width: 150%;
-    }
-    .arrows {
-      bottom: 1.5%;
-      right: 32%;
-      &__left {
-        margin-right: 15px;
-      }
+      width: 175%;
+      margin-left: -25%;
+      position: relative;
+      left: 0;
+      transition: all 1s ease;
     }
   }
   &__slider-item {
@@ -470,7 +481,6 @@ body {
       @include calcWidth(250px, 1920px, $padding: false);
       @include tablets {
         width: 25%;
-        margin-left: -25%;
       }
     }
     &:nth-child(2) {
@@ -482,7 +492,7 @@ body {
     &:nth-child(3) {
       @include calcWidth(590px, 1920px, $padding: false);
       @include tablets {
-        width: 25%;
+        width: 50%;
       }
     }
     @extend %width100;
@@ -514,29 +524,17 @@ body {
       @include adaptiv-font(12, 10);
     }
   }
-}
-.play {
-  height: 70px;
-  opacity: 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.2s linear;
-}
-// slider in section "latest"
-.arrows {
-  @include flex(flex, row, space-between, center);
-  @include tablets {
-    right: 10%;
-  }
-  position: absolute;
-  bottom: 1.5%;
-  right: 32%;
-  transform: translate(-50%, -50%);
-  .arrow__left {
-    margin-right: 15px;
-  }
+  .arrows {
+      // display: none;
+      bottom: 1.5%;
+      right: 32%;
+      .arrow__left {
+        margin-right: 15px;
+      }
+      @include tablets {
+        display: block;
+      }
+    }
 }
 // section "reviews"
 .reviews {
