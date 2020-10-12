@@ -171,6 +171,48 @@ document.addEventListener("DOMContentLoaded", function () {
         step = 2;
       }
     });
+  }; // ---------Slider №3 in section "The Latest Articles"---------
+
+
+  var sliderLatestArticles = function sliderLatestArticles() {
+    var SLIDER = document.querySelector(".articles__slider-inner"),
+        // All slides are stored here
+    CAROUSEL = document.querySelector(".articles__slider-carousel"),
+        // Need fo flex position
+    PREV = document.querySelector(".articles__slider-carousel .arrow__left"),
+        // Arrow left
+    NEXT = document.querySelector(".articles__slider-carousel .arrow__right"); // Arrow right
+
+    var ditection = 1;
+    PREV.addEventListener("click", function () {
+      if (ditection == 1) {
+        SLIDER.appendChild(SLIDER.firstElementChild);
+        ditection = -1;
+      }
+
+      CAROUSEL.style.justifyContent = "flex-end"; // If we don't do this, first that we will see is a white space
+
+      SLIDER.style.transform = "translate(25%)";
+    });
+    NEXT.addEventListener("click", function () {
+      ditection = 1;
+      CAROUSEL.style.justifyContent = "flex-start";
+      SLIDER.style.transform = "translate(-25%)";
+    }); // When transition ends, append first element to the end
+
+    SLIDER.addEventListener("transitionend", function () {
+      if (ditection == 1) {
+        SLIDER.appendChild(SLIDER.firstElementChild);
+      } else if (ditection == -1) {
+        SLIDER.prepend(SLIDER.lastElementChild);
+      }
+
+      SLIDER.style.transition = "none";
+      SLIDER.style.transform = "translate(0)";
+      setTimeout(function () {
+        SLIDER.style.transition = "transform 1s";
+      });
+    });
   };
 
   var app = function app() {
@@ -179,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
     navigationLinks();
     sliderHero();
     sliderLatest();
+    sliderLatestArticles();
   };
 
   app();

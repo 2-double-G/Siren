@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   // ---------Slider №2 in section "The Latest"---------
-  const sliderLatest= () => {
+  const sliderLatest = () => {
     const SLIDER_WIDTH = document.querySelector(".latest__slider").offsetWidth,
           SLIDES = document.querySelectorAll(".latest__slider-item"),
           SLIDER_CONT = document.querySelector(".latest__slider-container"),
@@ -173,6 +173,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   }
+  // ---------Slider №3 in section "The Latest Articles"---------
+  const sliderLatestArticles = () => {
+  const SLIDER = document.querySelector(".articles__slider-inner"), // All slides are stored here
+        CAROUSEL = document.querySelector(".articles__slider-carousel"), // Need fo flex position
+        PREV = document.querySelector(".articles__slider-carousel .arrow__left"), // Arrow left
+        NEXT = document.querySelector(".articles__slider-carousel .arrow__right"); // Arrow right
+
+  let ditection = 1;
+    PREV.addEventListener("click", () => {
+      if (ditection == 1) {
+        SLIDER.appendChild(SLIDER.firstElementChild);
+        ditection = -1;
+      }
+      CAROUSEL.style.justifyContent = `flex-end`; // If we don't do this, first that we will see is a white space
+      SLIDER.style.transform = `translate(25%)`;
+    });
+
+    NEXT.addEventListener("click", () => {
+      ditection = 1;
+      CAROUSEL.style.justifyContent = `flex-start`;
+      SLIDER.style.transform = `translate(-25%)`;
+    });
+
+    // When transition ends, append first element to the end
+    SLIDER.addEventListener("transitionend", () => {
+      if (ditection == 1) {
+        SLIDER.appendChild(SLIDER.firstElementChild);
+      } else if (ditection == -1) {
+        SLIDER.prepend(SLIDER.lastElementChild);
+      }
+
+      SLIDER.style.transition = `none`;
+      SLIDER.style.transform = `translate(0)`;
+      setTimeout( () => {
+        SLIDER.style.transition = `transform 1s`;
+      })
+    });
+  }
 
   const app = () => {
     navSlide();
@@ -180,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navigationLinks();
     sliderHero();
     sliderLatest();
+    sliderLatestArticles();
   };
 
   app();

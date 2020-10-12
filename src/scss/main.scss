@@ -300,7 +300,7 @@ body {
     left: 0;
     right: 0;
     opacity: 0;
-    transition: opacity .3s linear;
+    transition: opacity 0.3s linear;
     &.--on {
       opacity: 1;
     }
@@ -470,6 +470,7 @@ body {
     }
   }
   &__slider-item {
+    position: relative;
     @include tablets {
       img {
         height: 100vh;
@@ -508,6 +509,7 @@ body {
     @include tablets {
       bottom: 25%;
       right: 20%;
+      z-index: 10;
     }
     h3 {
       line-height: 1.2;
@@ -525,16 +527,19 @@ body {
     }
   }
   .arrows {
-      // display: none;
-      bottom: 1.5%;
-      right: 32%;
-      .arrow__left {
-        margin-right: 15px;
-      }
-      @include tablets {
-        display: block;
-      }
+    // display: none;
+    position: absolute;
+    bottom: 1.5%;
+    right: 32%;
+    .arrow__left {
+      margin-right: 15px;
     }
+    @include tablets {
+      right: 50%;
+      display: flex;
+      align-content: center;
+    }
+  }
 }
 // section "reviews"
 .reviews {
@@ -830,6 +835,7 @@ body {
   // latest articles slider
   &__slider {
     position: relative;
+    // overflow-x: hidden;
     @extend %width100;
     .num-slide {
       display: inline-block;
@@ -839,6 +845,7 @@ body {
     .arrow__right {
       position: absolute;
       top: 55%;
+      z-index: 10;
     }
     .arrow__left {
       left: 25px;
@@ -846,26 +853,12 @@ body {
     .arrow__right {
       right: 25px;
     }
-    @include laptop {
-      width: 100%;
-    }
-    @include tablets {
-      height: 100vh;
-      margin-bottom: 30px;
-    }
-  }
-  &__slider-item {
-    @include tablets {
-      img {
-        height: 100vh;
-        object-fit: cover;
-      }
-    }
     .articles__slider-content {
       color: $default-color;
       position: absolute;
       top: 50%;
       left: 50%;
+      z-index: 10;
       text-align: center;
       transform: translate(-50%, -25%);
       @include contentStyle(36, 20, 10px, 500px);
@@ -878,6 +871,37 @@ body {
       @include smTablets {
         top: 60%;
         @include contentStyle(26, 18, 10px, 300px);
+      }
+    }
+    @include laptop {
+      width: 100%;
+    }
+    @include tablets {
+      height: 100vh;
+      margin-bottom: 30px;
+    }
+  }
+  &__slider-carousel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: hidden;
+  }
+  &__slider-inner {
+    width: 400%;
+    display: flex;
+    flex-direction: row;
+    transition: transform 1s;
+    flex-shrink: 0;
+  }
+  &__slider-item {
+    width: 100%;
+    flex-basis: 25%;
+    @include tablets {
+      img {
+        height: 100vh;
+        object-fit: cover;
       }
     }
   }
