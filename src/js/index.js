@@ -173,45 +173,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   }
-  // ---------Slider №3 in section "The Latest Articles"---------
-  const sliderLatestArticles = () => {
-  const SLIDER = document.querySelector(".articles__slider-inner"), // All slides are stored here
-        CAROUSEL = document.querySelector(".articles__slider-carousel"), // Need fo flex position
-        PREV = document.querySelector(".articles__slider-carousel .arrow__left"), // Arrow left
-        NEXT = document.querySelector(".articles__slider-carousel .arrow__right"); // Arrow right
+  // ---------Infinity slider---------
+  const infinitySlider = (enumarate, slider, carousel, prev, next, num, offset) => {
+    let ditection = 1,
+        numSlide = 1;
 
-  let ditection = 1;
-    PREV.addEventListener("click", () => {
+    prev.addEventListener("click", () => {
       if (ditection == 1) {
-        SLIDER.appendChild(SLIDER.firstElementChild);
+        slider.appendChild(slider.firstElementChild);
         ditection = -1;
       }
-      CAROUSEL.style.justifyContent = `flex-end`; // If we don't do this, first that we will see is a white space
-      SLIDER.style.transform = `translate(25%)`;
+      carousel.style.justifyContent = `flex-end`; // If we don't do this, first that we will see is a white space
+      slider.style.transform = `translate(${offset}%)`;    
+      numSlide--;
     });
 
-    NEXT.addEventListener("click", () => {
+    next.addEventListener("click", () => {
       ditection = 1;
-      CAROUSEL.style.justifyContent = `flex-start`;
-      SLIDER.style.transform = `translate(-25%)`;
+      carousel.style.justifyContent = `flex-start`;
+      slider.style.transform = `translate(-${offset}%)`;
+      numSlide++;
     });
 
     // When transition ends, append first element to the end
-    SLIDER.addEventListener("transitionend", () => {
+    slider.addEventListener("transitionend", () => {
       if (ditection == 1) {
-        SLIDER.appendChild(SLIDER.firstElementChild);
+        slider.appendChild(slider.firstElementChild);
       } else if (ditection == -1) {
-        SLIDER.prepend(SLIDER.lastElementChild);
+        slider.prepend(slider.lastElementChild);
       }
 
-      SLIDER.style.transition = `none`;
-      SLIDER.style.transform = `translate(0)`;
+      slider.style.transition = `none`;
+      slider.style.transform = `translate(0)`;
       setTimeout( () => {
-        SLIDER.style.transition = `transform 1s`;
+        slider.style.transition = `transform 1s`;
       })
+
+      if (enumarate == true) {
+        if (numSlide > 4) {
+          numSlide = 1;
+        } else if (numSlide < 1) {
+          numSlide = 4;
+        }
+  
+        num.innerHTML = `0${numSlide}`;
+      }
     });
   }
+  // ---------Slider №3 in section "The Latest Articles"---------
+  const sliderLatestArticles = () => {
+    const SLIDER = document.querySelector(".articles__slider-inner"), // All slides are stored here
+          CAROUSEL = document.querySelector(".articles__slider-carousel"), // Need fo flex position
+          PREV = document.querySelector(".articles__slider-carousel .arrow__left"), // Arrow left
+          NEXT = document.querySelector(".articles__slider-carousel .arrow__right"), // Arrow right
+          NUM_SLIDE = document.querySelector(".articles__slider-content .num-slide__value");
 
+    infinitySlider(true, SLIDER, CAROUSEL, PREV, NEXT, NUM_SLIDE, 25);
+  }
+  // ---------Slider №4 in section "The Latest Articles"---------
+  const sliderFullscreen = () => {
+    const SLIDER = document.querySelector(".fullscreen__slider"), // All slides are stored here
+          CAROUSEL = document.querySelector(".fullscreen__inner"), // Need fo flex position
+          PREV = document.querySelector(".fullscreen__inner .arrow__left"), // Arrow left
+          NEXT = document.querySelector(".fullscreen__inner .arrow__right"); // Arrow right
+
+    infinitySlider(false, SLIDER, CAROUSEL, PREV, NEXT, null, 33.333);
+  }
   const app = () => {
     navSlide();
     fixesNav();
@@ -219,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sliderHero();
     sliderLatest();
     sliderLatestArticles();
+    sliderFullscreen();
   };
 
   app();

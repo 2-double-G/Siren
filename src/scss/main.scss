@@ -527,7 +527,7 @@ body {
     }
   }
   .arrows {
-    // display: none;
+    display: none;
     position: absolute;
     bottom: 1.5%;
     right: 32%;
@@ -844,6 +844,7 @@ body {
     .arrow__left,
     .arrow__right {
       position: absolute;
+      cursor: pointer;
       top: 55%;
       z-index: 10;
     }
@@ -992,14 +993,18 @@ body {
 }
 // section with fullscreen slider
 .fullscreen {
-  display: flex;
   min-height: 100vh;
   position: relative;
   &__inner {
-    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: hidden;
     .arrow__left,
     .arrow__right {
       position: absolute;
+      cursor: pointer;
       top: 55%;
       z-index: 3;
     }
@@ -1010,8 +1015,29 @@ body {
       right: 50px;
     }
   }
+  &__slider {
+    width: 300%;
+    display: flex;
+    flex-direction: row;
+    transition: transform 1s;
+    flex-shrink: 0;
+  }
   &__item {
+    flex-basis: 33.3333%;
     position: relative;
+    img {
+      height: 100vh;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__content {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    color: $default-color;
     @include contentStyle(64, 28, 0.3em, 80vw);
     @include tablets {
       h3 {
@@ -1042,19 +1068,6 @@ body {
         color: $titleFont-color;
       }
     }
-    img {
-      height: 100vh;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-  &__content {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    color: $default-color;
     @include smPhones {
       top: 55%;
     }
@@ -1073,7 +1086,7 @@ body {
     padding: 40px 0;
     @include flex(flex, row, stretch, stretch);
     @include articleStyle(36, 20, 100%, 1.38em, 100%);
-    @include laptop {
+    @include tablets {
       padding: 0;
       flex-direction: column;
       align-items: center;
@@ -1091,7 +1104,7 @@ body {
       &:nth-child(2) {
         border-left: 1px solid $border-color;
         border-right: 1px solid $border-color;
-        @include laptop {
+        @include tablets {
           border-top: 1px solid $border-color;
           border-bottom: 1px solid $border-color;
         }

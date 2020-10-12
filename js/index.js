@@ -171,6 +171,53 @@ document.addEventListener("DOMContentLoaded", function () {
         step = 2;
       }
     });
+  }; // ---------Infinity slider---------
+
+
+  var infinitySlider = function infinitySlider(enumarate, slider, carousel, prev, next, num, offset) {
+    var ditection = 1,
+        numSlide = 1;
+    prev.addEventListener("click", function () {
+      if (ditection == 1) {
+        slider.appendChild(slider.firstElementChild);
+        ditection = -1;
+      }
+
+      carousel.style.justifyContent = "flex-end"; // If we don't do this, first that we will see is a white space
+
+      slider.style.transform = "translate(".concat(offset, "%)");
+      numSlide--;
+    });
+    next.addEventListener("click", function () {
+      ditection = 1;
+      carousel.style.justifyContent = "flex-start";
+      slider.style.transform = "translate(-".concat(offset, "%)");
+      numSlide++;
+    }); // When transition ends, append first element to the end
+
+    slider.addEventListener("transitionend", function () {
+      if (ditection == 1) {
+        slider.appendChild(slider.firstElementChild);
+      } else if (ditection == -1) {
+        slider.prepend(slider.lastElementChild);
+      }
+
+      slider.style.transition = "none";
+      slider.style.transform = "translate(0)";
+      setTimeout(function () {
+        slider.style.transition = "transform 1s";
+      });
+
+      if (enumarate == true) {
+        if (numSlide > 4) {
+          numSlide = 1;
+        } else if (numSlide < 1) {
+          numSlide = 4;
+        }
+
+        num.innerHTML = "0".concat(numSlide);
+      }
+    });
   }; // ---------Slider №3 in section "The Latest Articles"---------
 
 
@@ -181,38 +228,23 @@ document.addEventListener("DOMContentLoaded", function () {
         // Need fo flex position
     PREV = document.querySelector(".articles__slider-carousel .arrow__left"),
         // Arrow left
-    NEXT = document.querySelector(".articles__slider-carousel .arrow__right"); // Arrow right
+    NEXT = document.querySelector(".articles__slider-carousel .arrow__right"),
+        // Arrow right
+    NUM_SLIDE = document.querySelector(".articles__slider-content .num-slide__value");
+    infinitySlider(true, SLIDER, CAROUSEL, PREV, NEXT, NUM_SLIDE, 25);
+  }; // ---------Slider №4 in section "The Latest Articles"---------
 
-    var ditection = 1;
-    PREV.addEventListener("click", function () {
-      if (ditection == 1) {
-        SLIDER.appendChild(SLIDER.firstElementChild);
-        ditection = -1;
-      }
 
-      CAROUSEL.style.justifyContent = "flex-end"; // If we don't do this, first that we will see is a white space
+  var sliderFullscreen = function sliderFullscreen() {
+    var SLIDER = document.querySelector(".fullscreen__slider"),
+        // All slides are stored here
+    CAROUSEL = document.querySelector(".fullscreen__inner"),
+        // Need fo flex position
+    PREV = document.querySelector(".fullscreen__inner .arrow__left"),
+        // Arrow left
+    NEXT = document.querySelector(".fullscreen__inner .arrow__right"); // Arrow right
 
-      SLIDER.style.transform = "translate(25%)";
-    });
-    NEXT.addEventListener("click", function () {
-      ditection = 1;
-      CAROUSEL.style.justifyContent = "flex-start";
-      SLIDER.style.transform = "translate(-25%)";
-    }); // When transition ends, append first element to the end
-
-    SLIDER.addEventListener("transitionend", function () {
-      if (ditection == 1) {
-        SLIDER.appendChild(SLIDER.firstElementChild);
-      } else if (ditection == -1) {
-        SLIDER.prepend(SLIDER.lastElementChild);
-      }
-
-      SLIDER.style.transition = "none";
-      SLIDER.style.transform = "translate(0)";
-      setTimeout(function () {
-        SLIDER.style.transition = "transform 1s";
-      });
-    });
+    infinitySlider(false, SLIDER, CAROUSEL, PREV, NEXT, null, 33.333);
   };
 
   var app = function app() {
@@ -222,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sliderHero();
     sliderLatest();
     sliderLatestArticles();
+    sliderFullscreen();
   };
 
   app();
