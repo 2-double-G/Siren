@@ -68,7 +68,7 @@ body {
   width: 100%;
   background-color: $default-color;
   z-index: 15;
-  transition: 1s;
+  transition: box-shadow 1s;
   .nav {
     background-color: $default-color;
   }
@@ -1086,6 +1086,7 @@ body {
     padding: 40px 0;
     @include flex(flex, row, stretch, stretch);
     @include articleStyle(36, 20, 100%, 1.38em, 100%);
+    cursor: default;
     @include tablets {
       padding: 0;
       flex-direction: column;
@@ -1215,13 +1216,25 @@ body {
     }
   }
   &__player {
+    overflow: hidden;
+    position: relative;
+    color: $default-color;
     @include calcWidth(920px, $maxWidth, $padding: true);
     @include laptop {
       width: 100%;
     }
-    position: relative;
-    color: $default-color;
-    cursor: pointer;
+    &::after {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
   &__playlist {
     width: 32%;
@@ -1295,16 +1308,13 @@ body {
   }
   &__player-tools {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
+    width: 100%;
     padding: 30px;
     img {
       max-width: 17px;
     }
-    @include flex(flex, column, space-between, stretch);
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s linear;
     &:hover {
       opacity: 1;
@@ -1318,20 +1328,54 @@ body {
     @include flex(flex, row, space-between, center);
   }
   &__player-timeline {
-    padding-top: 15px;
-    box-shadow: 0px -4px 0px 0px rgba(69, 69, 69, 0.3);
     position: relative;
-    &::before {
-      content: "";
+    .video__progress {
+      cursor: pointer;
       position: absolute;
-      top: 0;
-      transform: translate(0, -100%);
+      top: -50%;
+      left: 0;
+      width: 100%;
+      transform: translateY(-100%);
+      // background: linear-gradient(90deg, $highlight-color 60%, rgba(69, 69, 69, .3) 60%);
       height: 4px;
-      width: 60%;
+      outline: none;
+    }
+    .video__progress::-ms-thumb {
+      cursor: pointer;
       background-color: $highlight-color;
     }
+    .video__progress::-moz-range-track {
+      cursor: pointer;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $highlight-color;
+      border: none;
+    }
+    .video__progress::-webkit-slider-thumb {
+      cursor: pointer;
+      appearance: none;
+      width: 10px;
+      height: 10px;
+      border-radius: 100%;
+      background-color: $highlight-color;
+    }
+    // padding-top: 15px;
+    // box-shadow: 0px -4px 0px 0px rgba(69, 69, 69, 0.3);
+    // position: relative;
+    // &::before {
+    //   content: "";
+    //   position: absolute;
+    //   top: 0;
+    //   transform: translate(0, -100%);
+    //   height: 4px;
+    //   width: 60%;
+    //   background-color: $highlight-color;
+    // }
   }
 }
+
 .timeline__left,
 .timeline__right {
   width: 120px;

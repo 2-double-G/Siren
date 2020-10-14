@@ -495,16 +495,14 @@
                 <h2>Latest Video</h2>
                 <div class="video__block">
                     <div class="video__player">
-                        <img src="./img/latest-video/video.jpg" alt="video IKEA">
+                        <!-- <img src="./img/latest-video/video.jpg" alt="video IKEA"> -->
+                        <div id="player"></div>
                         <div class="video__player-tools">
-                            <div class="video__player-header">
-                                <h3>IKEA launches solar battery</h3>
-                                <img src="./img/latest-video/share.svg" alt="share">
-                            </div>
                             <div class="video__player-timeline timeline">
+                                <input class="video__progress" type="range" min="0" max="1000"/>
                                 <div class="timeline__left">
                                     <img src="./img/latest-video/play.svg" alt="play">
-                                    <p>08:22 / 10:09</p>
+                                    <p><span class="video__current-time">00:00</span> / <span class="video__duration">00:00</span></p>
                                 </div>
                                 <div class="timeline__right">
                                     <img src="./img/latest-video/volume.svg" alt="volume">
@@ -581,13 +579,13 @@
             </div>
                 <nav class="footer__nav nav">
                     <ul>
-                        <li class="nav__link"><a href="#">Features</a></li>
-                        <li class="nav__link"><a href="#">Fashion</a></li>
-                        <li class="nav__link"><a href="#">Music</a></li>
-                        <li class="nav__link"><a href="#">Design</a></li>
-                        <li class="nav__link"><a href="#">Travel</a></li>
-                        <li class="nav__link"><a href="#">Style</a></li>
-                        <li class="nav__link"><a href="#">People</a></li>
+                        <li class="nav__link"><a href="#" data-link="hero">Features</a></li>
+                        <li class="nav__link"><a href="#" data-link="stories">Fashion</a></li>
+                        <li class="nav__link"><a href="#" data-link="reviews">Music</a></li>
+                        <li class="nav__link"><a href="#" data-link="latest">Design</a></li>
+                        <li class="nav__link"><a href="#" data-link="articles">Travel</a></li>
+                        <li class="nav__link"><a href="#" data-link="video">Style</a></li>
+                        <li class="nav__link"><a href="#" data-link="gallery">People</a></li>
                     </ul>
                 </nav>
             <div class="footer__socials">
@@ -620,6 +618,7 @@
             </div>
         </div>
     </footer>
+    <script src="./src/js/video.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>
