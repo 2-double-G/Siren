@@ -1,15 +1,32 @@
+
+const TIMELINE = document.querySelector(".video__progress"),
+      TIME_ABOVE = document.querySelector(".show-time"),
+      DURATION = document.querySelector(".video__duration"),
+      VIDEO_TIME = document.querySelector(".video__current-time"),
+      START = document.querySelector(".video__start"),
+      PAUSE = document.querySelector(".fa-pause-circle"),
+      PLAYLIST = document.querySelector(".video__playlist"),
+      PLAYLIST_ITEM = document.querySelectorAll(".video__playlist-item");
+
+let player,
+    id = "bOp6gsu3P38",
+    videoDuration = 144,
+    totalSeconds,
+    time,
+    koef;
+    
 // Load the IFrame Player API code asynchronously.
 let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/player_api";
 let firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-let player;
+// Creates an <iframe> (and YouTube player) after the API code downloads
 function onYouTubePlayerAPIReady() {
   player = new YT.Player('player', {
     height: '360',
     width: '640',
-    videoId: 'bOp6gsu3P38',
+    videoId: id,
     playerVars: {
         'controls': 0,
         'rel': 0,
@@ -24,13 +41,25 @@ function onYouTubePlayerAPIReady() {
       }
   });
 }
-
-let videoDuration = 0;
-let totalSeconds;
-let time;
-let koef;
-const DURATION = document.querySelector(".video__duration"),
-      VIDEO_TIME = document.querySelector(".video__current-time");
+// The API will call this function when the video player is ready
+function onPlayerReady(event) {
+  DURATION.innerHTML =  parseDuration(videoDuration);
+  koef = 1000 / videoDuration;
+}
+// The API calls this function when the player's state changes
+function onPlayerStateChange(event) {
+  switch (event.data) {
+    case YT.PlayerState.PLAYING:
+      start();
+      break;
+    case YT.PlayerState.PAUSED:
+      pause();
+      break;
+    case YT.PlayerState.ENDED:
+      pause();
+      break;
+  }
+}
 
 function parseDuration(totalSeconds) {
     let minutes = Math.floor(totalSeconds / 60),
@@ -58,13 +87,7 @@ function convertTime(miliseconds) {
   return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
 
-function onPlayerReady(event) {
-    videoDuration = event.target.getDuration();
-    DURATION.innerHTML =  parseDuration(videoDuration);
-    koef = 1000 / videoDuration;
-  }
-
-
+// ---------Timer---------
   let ms = 0, s = 0, m = 0;
   let timer;
 
@@ -76,8 +99,7 @@ function onPlayerReady(event) {
 
   function run() {
     VIDEO_TIME.innerHTML =  getTimer();
-    //   console.log(getTimer());
-    //   stopwatchEl.textContent = getTimer();
+    
       ms++;
       if(ms == 100) {
           ms = 0;
@@ -104,7 +126,6 @@ function onPlayerReady(event) {
       ms = 0;
       s = 0;
       m = 0;
-    //   stopwatchEl.textContent = getTimer();
   }
 
   function stopTimer() {
@@ -121,18 +142,64 @@ function onPlayerReady(event) {
       start();
   }
 
-
-function onPlayerStateChange(event) {
-    
-    if (event.data == YT.PlayerState.PLAYING) { // If i don't do this, the timer will reset to zero
-        start();
-      } else if (event.data == YT.PlayerState.PAUSED) {
-        pause();
-      } else if (event.data == YT.PlayerState.ENDED) {
-        pause();
-      }
-}
-// ------------Range slider foe video timeline-----------------
-const TIMELINE = document.querySelector(".video__progress");
+// ---------For timeline---------
+TIMELINE.addEventListener("mousemove", (event) => {
+  let left = TIMELINE.getBoundingClientRect().left,
+      right = TIMELINE.getBoundingClientRect().right;
+  // Calculate timeline lenght
+  let timelineLength = right - left;
+  let client = window.event.clientX;
+  // Where is a client mouse
+  let clientPos = client - left;
+  // Shows selected time
+  let percent = (clientPos / timelineLength);
+  TIME_ABOVE.style.opacity = "1";
+  TIME_ABOVE.style.left = `${percent*100}%`;
+  TIME_ABOVE.innerHTML = parseDuration((percent * videoDuration).toFixed(0));
+});
+// ---------Hide time---------
+TIMELINE.addEventListener("mouseleave", (event) => {
+  TIME_ABOVE.style.opacity = "0";
+});
+// ---------If user wanna change time---------
+TIMELINE.addEventListener("input", (event) => {
+    let newS = Math.floor(videoDuration * TIMELINE.value / 1000);
+    m = Math.floor((Math.floor(videoDuration * TIMELINE.value / 1000)) / 60);
+    s = newS - m * 60;
+    player.seekTo(newS, true);
+  });
+// ---------Pause button---------
+PAUSE.addEventListener("click", () => {
+  player.pauseVideo();
+  PAUSE.style.display = "none";
+  START.style.display = "block";
+});
+// ---------Start button---------
+START.addEventListener("click", () => {
+  player.playVideo();
+  START.style.display = "none";
+  PAUSE.style.display = "block";
+});
+// ---------Show selected video---------
+PLAYLIST_ITEM.forEach((item) => {
+  item.addEventListener("click", () => {
+    document.getElementById(id).classList.remove("--play");
+    // Get video id
+    id = item.id;
+    // Рighlight video
+    item.classList.add("--play");
+    // Load video
+    player.loadVideoById(id);
+    // Restart timer
+    restart()
+    // Get new video duration
+    let newM, newS;
+    [newM, newS] = item.querySelector(".video__playlist-time").innerHTML.split(":");
+    videoDuration = parseInt(newM) * 60 + parseInt(newS);
+    console.log(videoDuration);
+    DURATION.innerHTML =  parseDuration(videoDuration);
+    koef = 1000 / videoDuration;
+  });
+});
 
 

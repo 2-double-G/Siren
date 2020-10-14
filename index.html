@@ -7,6 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap" rel="stylesheet">
+    <script
+      src="https://kit.fontawesome.com/8a5b4365d1.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Siren</title>
 </head>
 <body>
@@ -499,41 +503,40 @@
                         <div id="player"></div>
                         <div class="video__player-tools">
                             <div class="video__player-timeline timeline">
-                                <input class="video__progress" type="range" min="0" max="1000"/>
+                                <span class="show-time"></span>
+                                <input class="video__progress" type="range" min="0" max="1000" value="0"/>
                                 <div class="timeline__left">
-                                    <img src="./img/latest-video/play.svg" alt="play">
-                                    <p><span class="video__current-time">00:00</span> / <span class="video__duration">00:00</span></p>
-                                </div>
-                                <div class="timeline__right">
-                                    <img src="./img/latest-video/volume.svg" alt="volume">
-                                    <img src="./img/latest-video/full.svg" alt="fullscreen">
+                                    <img class="video__start" src="./img/latest-video/play.svg" alt="play">
+                                    <i class="far fa-pause-circle"></i>
+                                    <p class="video__time"><span class="video__current-time">00:00</span> / <span class="video__duration">00:00</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="video__playlist">
-                        <div class="video__playlist-item">
+                        <div class="video__playlist-item" id="yoYZf-lBF_U">
                             <h3 class="title">Monochrome Canadian ski lodge by Atelier Kastelic</h3>
                             <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                            <p class="video__playlist-time">23:07</p>
+                            <p class="video__playlist-time">4:25</p>
                         </div>
-                        <div class="video__playlist-item --play">
+                        <div class="video__playlist-item --play" id="bOp6gsu3P38">
                             <h3 class="title">IKEA launches solar battery</h3>
-                            <div class="video__playlist-status">
+                            <!-- <div class="video__playlist-status">
                                 <img src="./img/latest-video/play-atcive.svg" alt="play active">
                                 <p> Play Now</p>
-                            </div>
-                            <p class="video__playlist-time">10:09 </p>
+                            </div> -->
+                            
+                            <p class="video__playlist-time">2:24</p>
                         </div>
-                        <div class="video__playlist-item">
+                        <div class="video__playlist-item" id="_JZom_gVfuw">
                             <h3 class="title">Timeline of Design History</h3>
                             <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                            <p class="video__playlist-time">06:02 </p>
+                            <p class="video__playlist-time">4:13</p>
                         </div>
-                        <div class="video__playlist-item">
+                        <div class="video__playlist-item" id="5wBTdfAkqGU">
                             <h3 class="title">Contemporary Canadian farmhouse</h3>
                             <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
-                            <p class="video__playlist-time">15:00 </p>
+                            <p class="video__playlist-time">5:35</p>
                         </div>
                     </div>
                 </div>
@@ -618,7 +621,7 @@
             </div>
         </div>
     </footer>
-    <script src="./src/js/video.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/video.js"></script>
 </body>
 </html>
