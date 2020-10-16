@@ -8,6 +8,8 @@ const TIMELINE = document.querySelector(".video__progress"),
       PLAYLIST = document.querySelector(".video__playlist"),
       PLAYLIST_ITEM = document.querySelectorAll(".video__playlist-item");
 
+let underline;
+
 let player,
     id = "bOp6gsu3P38",
     videoDuration = 144,
@@ -15,6 +17,7 @@ let player,
     time,
     koef;
     
+
 // Load the IFrame Player API code asynchronously.
 let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/player_api";
@@ -60,31 +63,11 @@ function onPlayerStateChange(event) {
       break;
   }
 }
-
 function parseDuration(totalSeconds) {
     let minutes = Math.floor(totalSeconds / 60),
         seconds = totalSeconds - minutes * 60;
 
     return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
-}
-
-function checkTime(){
-  let timeDifference = Date.now() - time;
-  let formatted = convertTime(timeDifference);
-  VIDEO_TIME.innerHTML =  '' + formatted;
-}
-
-function convertTime(miliseconds) {
-    if (totalSeconds >= videoDuration) {
-        totalSeconds = videoDuration;
-    } else {
-        totalSeconds = Math.floor(miliseconds/1000);
-    }
-
-  let minutes = Math.floor(totalSeconds/60),
-      seconds = totalSeconds - minutes * 60;
-
-  return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
 
 // ---------Timer---------
@@ -96,7 +79,6 @@ function convertTime(miliseconds) {
           timer = setInterval(run, 10);
       }
   }
-
   function run() {
     VIDEO_TIME.innerHTML =  getTimer();
     
@@ -115,33 +97,30 @@ function convertTime(miliseconds) {
   
       let color = `linear-gradient(90deg, #f78181 ${x}%, rgba(69, 69, 69, .3) ${x}%)`;
       TIMELINE.style.background = color;
-  }
 
+      underline.style.width = `${x}%`;
+
+  }
   function pause() {
       stopTimer();
   }
-
   function stop() {
       stopTimer();
       ms = 0;
       s = 0;
       m = 0;
   }
-
   function stopTimer() {
       clearInterval(timer);
       timer = false;
   }
-
   function getTimer() {
       return m + ":" + (s < 10 ? "0" + s : s);
   }
-
   function restart() {
       stop();
       start();
   }
-
 // ---------For timeline---------
 TIMELINE.addEventListener("mousemove", (event) => {
   let left = TIMELINE.getBoundingClientRect().left,
@@ -196,10 +175,11 @@ PLAYLIST_ITEM.forEach((item) => {
     let newM, newS;
     [newM, newS] = item.querySelector(".video__playlist-time").innerHTML.split(":");
     videoDuration = parseInt(newM) * 60 + parseInt(newS);
-    console.log(videoDuration);
     DURATION.innerHTML =  parseDuration(videoDuration);
     koef = 1000 / videoDuration;
+
+    underline = document.createElement("div");
+    underline.classList.add("underline");
+    item.append(underline);
   });
 });
-
-

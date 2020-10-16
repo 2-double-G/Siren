@@ -11,6 +11,46 @@ body {
   line-height: $mainLineHeight;
   color: $mainFont-color;
 }
+// logo
+.logo {
+  padding: 15px 0;
+  text-align: center;
+  font-family: $logoFont;
+  color: $logoFont-color;
+  @include adaptiv-font(50, 30);
+  h1 {
+    position: relative;
+    display: inline-block;
+    span {
+      @include adaptiv-font(12, 10);
+      position: absolute;
+      top: 50%;
+      left: -15px;
+      transform: translate(-50%, -30%) rotate(-90deg);
+    }
+  }
+}
+// navbar
+.nav {
+  padding: 20px 0;
+  @extend %border-gray;
+  ul {
+    @include flex(flex, row, center, center);
+  }
+  &__link {
+    z-index: 2;
+    padding: 0 1.6em;
+    a {
+      text-align: center;
+      color: $titleFont-color;
+      transition: color 0.2s linear;
+      @include adaptiv-font(18, 14);
+      &:hover {
+        color: $highlightFont-color;
+      }
+    }
+  }
+}
 // title style
 .title {
   font-family: $mainFont;
@@ -63,16 +103,17 @@ body {
 }
 // --------HEADER--------
 .header {
-  position: fixed;
-  top: 0;
-  width: 100%;
   background-color: $default-color;
-  z-index: 15;
   transition: box-shadow 1s;
   .nav {
     background-color: $default-color;
   }
   @include tablets {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 15;
+    transition: top 0.7s;
     min-height: 10.1vh;
     .logo {
       position: absolute;
@@ -110,29 +151,6 @@ body {
       transform: translateX(0%);
     }
   }
-  &.--fixed {
-    transition: top 0.6s;
-    box-shadow: 0px 1px 10px 0px rgba(247, 129, 129, 0.5);
-    .wrapper {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    .logo {
-      padding: 10px 0;
-      margin-left: 20px;
-      @include tablets {
-        margin-left: 0;
-      }
-    }
-    .nav {
-      border: none;
-      &__link:last-child {
-        padding-right: 0;
-      }
-    }
-  }
   @include smPhonesH {
     min-height: 15vh;
     .nav.--active {
@@ -141,6 +159,34 @@ body {
     }
     .nav-toggle {
       top: 5.5vh;
+    }
+  }
+}
+.--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  box-shadow: 0px 1px 10px 0px rgba(247, 129, 129, 0.5);
+  transition: box-shadow 1s, top 0.7s;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .logo {
+    padding: 10px 0;
+    margin-left: 20px;
+    @include tablets {
+      margin-left: 0;
+    }
+  }
+  .nav {
+    border: none;
+    &__link:last-child {
+      padding-right: 0;
     }
   }
 }
@@ -153,46 +199,6 @@ body {
   to {
     opacity: 1;
     transform: translateX(0);
-  }
-}
-// header logo
-.logo {
-  padding: 15px 0;
-  text-align: center;
-  font-family: $logoFont;
-  color: $logoFont-color;
-  @include adaptiv-font(50, 30);
-  h1 {
-    position: relative;
-    display: inline-block;
-    span {
-      @include adaptiv-font(12, 10);
-      position: absolute;
-      top: 50%;
-      left: -15px;
-      transform: translate(-50%, -30%) rotate(-90deg);
-    }
-  }
-}
-// headre navbar
-.nav {
-  padding: 20px 0;
-  @extend %border-gray;
-  ul {
-    @include flex(flex, row, center, center);
-  }
-  &__link {
-    z-index: 2;
-    padding: 0 1.6em;
-    a {
-      text-align: center;
-      color: $titleFont-color;
-      transition: color 0.2s linear;
-      @include adaptiv-font(18, 14);
-      &:hover {
-        color: $highlightFont-color;
-      }
-    }
   }
 }
 // nav toggle
@@ -268,9 +274,9 @@ body {
 // --------MAIN--------
 // hero section
 .hero {
-  padding: 190px 0 40px;
+  padding: 40px 0 40px;
   @include tablets {
-    padding-top: 10vh;
+    padding-top: 10.1vh;
   }
   @include smTablets {
     padding-top: 15vh 0 30px;
@@ -377,6 +383,13 @@ body {
     &.--on {
       background-color: #ffffff;
     }
+    @include tablets {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  @include tablets {
+    height: 110px;
   }
 }
 // "the latest" section
@@ -1276,10 +1289,27 @@ body {
   &__playlist-item.--play {
     background-color: $sectionVideoHover-color;
   }
+  &__playlist-item.--play {
+    .video__playlist-status {
+      display: flex;
+    }
+    .date {
+      display: none;
+    }
+    .underline {
+      position: absolute;
+      top: 100%;
+      transform: translateY(-100%);
+      background-color: $highlight-color;
+      height: 3px;
+      width: 40px;
+    }
+  }
   &__playlist-status {
     width: 100px;
     position: relative;
     @include flex(flex, row, space-between, center);
+    display: none;
     img {
       max-width: 18px;
     }
@@ -1288,6 +1318,10 @@ body {
       font-size: 12px;
     }
   }
+  .date {
+    display: block;
+  }
+  
   &__playlist-time {
     position: absolute;
     right: 0;
@@ -1324,7 +1358,7 @@ body {
       top: -25px;
       left: 0;
       width: 100%;
-      background: rgba(69, 69, 69, .3);
+      background: rgba(69, 69, 69, 0.3);
       height: 4px;
       outline: none;
     }

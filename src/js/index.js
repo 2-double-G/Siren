@@ -1,29 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ---------Fix nav---------
   const fixesNav = () => {
-    const HEADER = document.querySelector(".header"),
-          SLIDER = document.querySelector(".nav"),
-          LOGO_HEIGHT = HEADER.getBoundingClientRect().bottom,
-          SLIDER_TOP = SLIDER.getBoundingClientRect().top;
-
+    const NAV = document.querySelector(".nav"),
+          FIXED =  NAV.getBoundingClientRect().top,
+          HERO = document.querySelector(".hero"),
+          HEADER = document.querySelector(".header"),
+          HEADER_HEIGHT = HEADER.getBoundingClientRect().bottom - 
+                          HEADER.getBoundingClientRect().top;
 
     let prevScrollPos = window.pageYOffset;
 
     document.addEventListener("scroll", () => {
       let currentScrollPosition = window.pageYOffset;
-  
-      if (currentScrollPosition > SLIDER_TOP) {
-        HEADER.classList.add("--fixed");
-        HEADER.style.top = prevScrollPos > currentScrollPosition ? "0" : "-100px";
-        // if ( (prevScrollPos > currentScrollPosition) ) {
-        //   HEADER.style.top = "0";
-        // } else {
-        //   HEADER.style.top = "-100px";
-        // }
+
+      let windowWidth = Math.max(
+        document.body.scrollWidth, document.documentElement.scrollWidth,
+        document.body.offsetWidth, document.documentElement.offsetWidth,
+        document.body.clientWidth, document.documentElement.clientWidth
+      );
+
+      if (windowWidth > 768) {
+        if (currentScrollPosition >= FIXED) {
+          HEADER.classList.add("--fixed");
+          HERO.style.paddingTop = `${40 + HEADER_HEIGHT}px`;
+        } else {
+          HEADER.classList.remove("--fixed");
+          HERO.style.paddingTop = "40px";
+        }
       } else {
-        HEADER.classList.remove("--fixed");
+        HERO.style.paddingTop = "10.1vh";
       }
 
+      if (currentScrollPosition > HEADER_HEIGHT) {
+        HEADER.style.top = prevScrollPos > currentScrollPosition ? "0" : "-100px";
+      }
       prevScrollPos = currentScrollPosition;
     });
   };
@@ -50,35 +60,44 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   // ---------Navigation---------
   const navigationLinks = () => {
+    const NAV = document.querySelector(".nav"),
+          BURGER = document.querySelector(".burger"),
+          NAV_LINKS = document.querySelectorAll(".nav__link"),
+          HEADER_HEIGHT = document.querySelector(".header").offsetHeight;
+
     document.addEventListener("click", (event) => {
       event.preventDefault();
-
-      const LINK = event.target,
-            NAV = document.querySelector(".nav"),
-            BURGER = document.querySelector(".burger"),
-            NAV_LINKS = document.querySelectorAll(".nav__link"),
-            HEADER_HEIGHT = document.querySelector(".header").offsetHeight;
       
+      const LINK = event.target;
+
       if ( !LINK.hasAttribute("data-link") ) return;
 
       console.log(`.${LINK.dataset.link}`);
       const DATA_LINK = `.${LINK.dataset.link}`,
             OFFSET_TOP = document.querySelector(DATA_LINK).offsetTop - HEADER_HEIGHT;
-
-      // Remove drpdown menu on click
-      NAV.classList.remove("--active");
-      // Remove burger menu animation
-      BURGER.classList.remove("--active");
   
-      NAV_LINKS.forEach((item, index) => {
-        if (item.style.animation) {
-          item.style.animation = "";
-        } else {
-          item.style.animation = `navLinkFade 0.3s ease forwards ${
-            index / 10 + 0.3
-          }s`;
-        }
-      });
+      let windowWidth = Math.max(
+        document.body.scrollWidth, document.documentElement.scrollWidth,
+        document.body.offsetWidth, document.documentElement.offsetWidth,
+        document.body.clientWidth, document.documentElement.clientWidth
+      );
+
+      if (windowWidth <= 768) {
+        // Remove drpdown menu on click
+        NAV.classList.remove("--active");
+        // Remove burger menu animation
+        BURGER.classList.remove("--active");
+
+        NAV_LINKS.forEach((item, index) => {
+          if (item.style.animation) {
+            item.style.animation = "";
+          } else {
+            item.style.animation = `navLinkFade 0.3s ease forwards ${
+              index / 10 + 0.3
+            }s`;
+          }
+        });
+      }
       
       scroll({
         top: OFFSET_TOP,
@@ -175,13 +194,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   // ---------Infinity slider---------
   const infinitySlider = (enumarate, slider, carousel, prev, next, num, offset) => {
-    let ditection = 1,
+    let direction = 1,
         numSlide = 1;
 
     prev.addEventListener("click", () => {
-      if (ditection == 1) {
+      if (direction == 1) {
         slider.appendChild(slider.firstElementChild);
-        ditection = -1;
+        direction = -1;
       }
       carousel.style.justifyContent = `flex-end`; // If we don't do this, first that we will see is a white space
       slider.style.transform = `translate(${offset}%)`;    
@@ -189,17 +208,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     next.addEventListener("click", () => {
-      ditection = 1;
+      if (direction == -1) {
+        slider.prepend(slider.lastElementChild);
+        direction = 1;
+      }
       carousel.style.justifyContent = `flex-start`;
       slider.style.transform = `translate(-${offset}%)`;
       numSlide++;
     });
 
-    // When transition ends, append first element to the end
     slider.addEventListener("transitionend", () => {
-      if (ditection == 1) {
+      if (direction == 1) {
+        // When transition ends, append first element to the end
         slider.appendChild(slider.firstElementChild);
-      } else if (ditection == -1) {
+      } else if (direction == -1) {
+        // When transition ends, insert last element to the beginning
         slider.prepend(slider.lastElementChild);
       }
 
@@ -215,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (numSlide < 1) {
           numSlide = 4;
         }
-  
         num.innerHTML = `0${numSlide}`;
       }
     });
