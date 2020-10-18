@@ -37,6 +37,11 @@ document.addEventListener("DOMContentLoaded", function () {
         HERO.style.paddingTop = "10.1vh";
       }
 
+      if (currentScrollPosition <= HERO.getBoundingClientRect().top) {
+        HEADER.classList.remove("--fixed");
+        HERO.style.paddingTop = "40px";
+      }
+
       if (currentScrollPosition > HEADER_HEIGHT) {
         HEADER.style.top = prevScrollPos > currentScrollPosition ? "0" : "-100px";
       }
@@ -75,23 +80,24 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var LINK = event.target;
       if (!LINK.hasAttribute("data-link")) return;
-      console.log(".".concat(LINK.dataset.link));
       var DATA_LINK = ".".concat(LINK.dataset.link),
           OFFSET_TOP = document.querySelector(DATA_LINK).offsetTop - HEADER_HEIGHT;
       var windowWidth = Math.max(document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth, document.body.clientWidth, document.documentElement.clientWidth);
 
       if (windowWidth <= 768) {
         // Remove drpdown menu on click
-        NAV.classList.remove("--active"); // Remove burger menu animation
+        if (!LINK.classList.contains("footer__link")) {
+          NAV.classList.remove("--active"); // Remove burger menu animation
 
-        BURGER.classList.remove("--active");
-        NAV_LINKS.forEach(function (item, index) {
-          if (item.style.animation) {
-            item.style.animation = "";
-          } else {
-            item.style.animation = "navLinkFade 0.3s ease forwards ".concat(index / 10 + 0.3, "s");
-          }
-        });
+          BURGER.classList.remove("--active");
+          NAV_LINKS.forEach(function (item, index) {
+            if (item.style.animation) {
+              item.style.animation = "";
+            } else {
+              item.style.animation = "navLinkFade 0.3s ease forwards ".concat(index / 10 + 0.3, "s");
+            }
+          });
+        }
       }
 
       scroll({

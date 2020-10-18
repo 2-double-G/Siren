@@ -31,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
         HERO.style.paddingTop = "10.1vh";
       }
 
+      if (currentScrollPosition <= HERO.getBoundingClientRect().top) {
+        HEADER.classList.remove("--fixed");
+        HERO.style.paddingTop = "40px";
+      }
+
       if (currentScrollPosition > HEADER_HEIGHT) {
         HEADER.style.top = prevScrollPos > currentScrollPosition ? "0" : "-100px";
       }
@@ -46,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     BURGER.addEventListener("click", () => {
       NAV.classList.toggle("--active");
       BURGER.classList.toggle("--active");
+
       // Animate links
       NAV_LINKS.forEach((item, index) => {
         if (item.style.animation) {
@@ -72,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if ( !LINK.hasAttribute("data-link") ) return;
 
-      console.log(`.${LINK.dataset.link}`);
       const DATA_LINK = `.${LINK.dataset.link}`,
             OFFSET_TOP = document.querySelector(DATA_LINK).offsetTop - HEADER_HEIGHT;
   
@@ -84,19 +89,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (windowWidth <= 768) {
         // Remove drpdown menu on click
-        NAV.classList.remove("--active");
-        // Remove burger menu animation
-        BURGER.classList.remove("--active");
-
-        NAV_LINKS.forEach((item, index) => {
-          if (item.style.animation) {
-            item.style.animation = "";
-          } else {
-            item.style.animation = `navLinkFade 0.3s ease forwards ${
-              index / 10 + 0.3
-            }s`;
-          }
-        });
+        if (!LINK.classList.contains("footer__link")) {
+          NAV.classList.remove("--active");
+          // Remove burger menu animation
+          BURGER.classList.remove("--active");
+          NAV_LINKS.forEach((item, index) => {
+            if (item.style.animation) {
+              item.style.animation = "";
+            } else {
+              item.style.animation = `navLinkFade 0.3s ease forwards ${
+                index / 10 + 0.3
+              }s`;
+            }
+          });
+        } 
       }
       
       scroll({
@@ -261,6 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     infinitySlider(false, SLIDER, CAROUSEL, PREV, NEXT, null, 33.333);
   }
+
   const app = () => {
     navSlide();
     fixesNav();

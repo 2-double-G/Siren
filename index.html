@@ -17,7 +17,7 @@
     <header class="header">
         <div class="wrapper">
             <div class="logo">
-                <h1><span>The</span>Siren</h1>
+                <h1 data-link="header"><span>The</span>Siren</h1>
             </div>
             <nav class="nav">
                 <ul>
@@ -30,6 +30,7 @@
                     <li class="nav__link"><a href="#" data-link="gallery">People</a></li>
                 </ul>
             </nav>
+            <!-- Burger menu -->
             <button class="burger nav-toggle" id="nav-toggle">
                 <span class="nav-toggle__item"></span>
             </button>
@@ -37,20 +38,21 @@
     </header>
     <main>
         <section class="hero">
-            <div class="wrapper"> 
-                <div class="hero__slider">
-                    <div class="pagination">
+            <div class="wrapper">
+                <!-- Slider №1 -->
+                <div class="hero__slider --animation">
+                    <div class="pagination --animation --stop-anim">
                         <div class="pagination__item" data-slider_hero="hero__slide-01"></div>
                         <div class="pagination__item --on" data-slider_hero="hero__slide-02"></div>
                         <div class="pagination__item" data-slider_hero="hero__slide-03"></div>
                         <div class="pagination__item" data-slider_hero="hero__slide-04"></div>
                     </div>
                     <div class="hero__slider-content">
-                        <p class="num-slide">
+                        <p class="num-slide --animation --stop-anim">
                             <span class="slash">/</span><span class="num-slide__value">02</span>
                         </p>  
-                        <h3><span>Arizona Ultimate Adventure</span><span>– Grand Canyon & Beyond</span></h3>
-                        <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
+                        <h3 class="--animation --stop-anim"><span>Arizona Ultimate Adventure</span><span>– Grand Canyon & Beyond</span></h3>
+                        <p class="date --animation --stop-anim">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                     </div>
                     <div class="hero__slider-item hero__slide-01">
                         <img src="./img/hero/slide-1.jpg" alt="Grand Canyon slide №1">
@@ -69,32 +71,34 @@
                     </div>
                 </div>
                 <div class="hero__imgs">
-                    <div class="hero__imgs-item">
-                        <img src="./img/hero/img-1.jpg" alt="">
+                    <div class="hero__imgs-item --animation">
+                        <img src="./img/hero/img-1.jpg" alt="Man">
                         <div class="hero__imgs-content">
-                            <h3>The SoundCloud You Loved Is Doomed</h3>
-                            <p class="date">Music<span>/</span><time datetime="2017-08-21">August 21 2017</p>
+                            <h3 class="--animation --stop-anim">The SoundCloud You Loved Is Doomed</h3>
+                            <p class="date --animation --stop-anim">Music<span>/</span><time datetime="2017-08-21">August 21 2017</p>
                         </div>
                     </div>
-                    <div class="hero__imgs-item">
-                        <img src="./img/hero/img-2.jpg" alt="">
+                    <div class="hero__imgs-item --animation">
+                        <img src="./img/hero/img-2.jpg" alt="Space">
                         <div class="hero__imgs-content">
-                            <h3>OneWeb vouches for high reliability of its deorbit system</h3>
-                            <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</p>
+                            <h3 class="--animation --stop-anim">OneWeb vouches for high reliability of its deorbit system</h3>
+                            <p class="date --animation --stop-anim">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
         <section class="latest">  
-            <div class="wrapper"><h2>The Latest</h2></div>          
-            <div class="latest__wrapper">
+            <div class="wrapper"><h2>The Latest</h2></div>
+            <!-- This wrapper for section color-->
+            <div class="latest__wrapper --animation">
                 <div class="wrapper">
+                    <!-- Three articles-->
                     <div class="latest__articles">
-                        <article>
+                        <article class="--animation --stop-anim">
                             <div class="latest__img">
                                 <img src="./img/latest/play.svg" alt="play" class="play">
-                                <img src="./img/latest/img-1.jpg" alt="">
+                                <img src="./img/latest/img-1.jpg" alt="Mountain">
                             </div>
                             <div class="latest__articles-content content">
                                 <h3 class="title">Joshua Tree<br>Overnight Adventure</h3>
@@ -102,10 +106,10 @@
                                 <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                             </div>
                         </article>
-                        <article>
+                        <article class="--animation --stop-anim">
                             <div class="latest__img">
                                 <img src="./img/latest/play.svg" alt="play" class="play">
-                                <img src="./img/latest/img-2.jpg" alt="">
+                                <img src="./img/latest/img-2.jpg" alt="Bridge">
                             </div>
                             <div class="latest__articles-content  content">
                                 <h3 class="title">Stretch it out at sunset<br>on Baker Beach</h3>
@@ -113,10 +117,10 @@
                                 <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                             </div>
                         </article>
-                        <article>
+                        <article class="--animation --stop-anim">
                             <div class="latest__img">
                                 <img src="./img/latest/play.svg" alt="play" class="play">
-                                <img src="./img/latest/img-3.jpg" alt="">
+                                <img src="./img/latest/img-3.jpg" alt="Green flower">
                             </div>
                             <div class="latest__articles-content  content">
                                 <h3 class="title">Fragile Future,<br>Private Commission Paris</h3>
@@ -126,14 +130,15 @@
                         </article>
                     </div>
                 </div>
+                <!-- Three ugly images-->
                 <div class="latest__slider ">
                     <div class="latest__slider-container">
-                            <div class="latest__slider-item">
-                                <img src="./img/latest/slide_01.jpg" alt="">
+                            <div class="latest__slider-item --animation --stop-anim">
+                                <img src="./img/latest/slide_01.jpg" alt="Part of a building">
                                 <div class="latest__slider-content"></div>
                             </div>
-                            <div class="latest__slider-item">
-                                <img src="./img/latest/slide_02.jpg" alt="">
+                            <div class="latest__slider-item --animation --stop-anim">
+                                <img src="./img/latest/slide_02.jpg" alt="Mountain">
                                 <div class="latest__slider-content">
                                     <p class="num-slide">
                                         <span class="slash">/</span><span class="num-slide__value">02</span>
@@ -145,8 +150,8 @@
                                     <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                                 </div>
                             </div>
-                            <div class="latest__slider-item">                
-                                <img src="./img/latest/slide_03.jpg" alt="">
+                            <div class="latest__slider-item --animation  --stop-anim">                
+                                <img src="./img/latest/slide_03.jpg" alt="Chinese Opera house">
                                 <div class="latest__slider-content"></div>
                             </div>
                     </div>                     
@@ -165,20 +170,14 @@
             <div class="wrapper">
                 <h2>Latest Reviews</h2>
                 <div class="reviews__articles">
-                    <article class="reviews__articles--big">
+                    <!-- It's the biggest article in section -->
+                    <article class="reviews__articles--big --animation --stop-anim">
                         <div class="reviews__img">
-                            <img src="./img/reviews/main-review.jpg" alt="">
-                            <div class="rating">
-                                <div class="inner">
-                                    <div class="circl-move">
-                                        <div class="circle-static">
-                                            <div class="number">
-                                                6.4
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <img src="./img/reviews/main-review.jpg" alt="Round building">
+                            <svg>
+                                <circle class="circle-progress" cx="50%" cy="50%" r="33px"></circle>
+                            </svg>
+                            <span class="rating">6.4</span>
                         </div>
                         <div class="reviews__articles-content content">
                                 <h3 class="title">This Visionary Exhibition <br>Explores a Post-Urban</h3>
@@ -188,41 +187,32 @@
                             <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                         </div>
                     </article>
-                    <div class="reviews__articles--mini">
-                        <article>
+                    <!-- Other mini articles -->
+                    <div class="reviews__articles--mini --animation --stop-anim">
+                        <article class=" --animation --stop-anim">
                             <div class="reviews__img">
-                                <img src="./img/reviews/img-1.jpg" alt="">
-                                <div class="rating --mini">
-                                    <div class="inner">
-                                        <div class="circl-move">
-                                            <div class="circle-static">
-                                                <div class="number">
-                                                    7.2
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="./img/reviews/img-1.jpg" alt="Woman">
+                                <!-- Rating circle -->
+                                <svg>
+                                    <circle class="circle-progress" cx="20" cy="20" r="18px"></circle>
+                                </svg>
+                                <!-- Rating -->
+                                <span class="rating">7.2</span>
                             </div>
                             <div class="reviews__articles-content">
                                 <h3 class="title">An iPod Shuffle for Spotify is surprisingly essential</h3>
                                 <p class="date">Music<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                             </div>
                         </article>
-                        <article>
+                        <article class=" --animation --stop-anim">
                             <div class="reviews__img">
-                                <img src="./img/reviews/img-2.jpg" alt="">
-                                <div class="rating --mini">
-                                    <div class="inner">
-                                        <div class="circl-move">
-                                            <div class="circle-static">
-                                                <div class="number">
-                                                    8.0
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="./img/reviews/img-2.jpg" alt="Dandelion">
+                                <!-- Rating circle -->
+                                <svg>
+                                    <circle class="circle-progress" cx="20" cy="20" r="18px"></circle>
+                                </svg>
+                                <!-- Rating -->
+                                <span class="rating">8.0</span>
                             </div>
                             <div class="reviews__articles-content">
                                 <h3 class="title">Fragile Future,
@@ -230,40 +220,30 @@
                                 <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                             </div>
                         </article>
-                        <article>
+                        <article class=" --animation --stop-anim">
                             <div class="reviews__img">
-                                <img src="./img/reviews/img-3.jpg" alt="">
-                                <div class="rating --mini">
-                                    <div class="inner">
-                                        <div class="circl-move">
-                                            <div class="circle-static">
-                                                <div class="number">
-                                                    6.9
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="./img/reviews/img-3.jpg" alt="Mountain">
+                                <!-- Rating circle -->
+                                <svg>
+                                    <circle class="circle-progress" cx="20" cy="20" r="18px"></circle>
+                                </svg>
+                                <!-- Rating -->
+                                <span class="rating">6.9</span>
                             </div>
                             <div class="reviews__articles-content">
                                 <h3 class="title">The first Europeans in the New World</h3>
                                 <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                             </div>
                         </article>
-                        <article>
+                        <article class=" --animation --stop-anim">
                             <div class="reviews__img">
-                                <img src="./img/reviews/img-4.jpg" alt="">
-                                <div class="rating --mini">
-                                    <div class="inner">
-                                        <div class="circl-move">
-                                            <div class="circle-static">
-                                                <div class="number">
-                                                    7.8
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <img src="./img/reviews/img-4.jpg" alt="Inside building">
+                                <!-- Rating circle -->
+                                <svg>
+                                    <circle class="circle-progress" cx="20" cy="20" r="18px"></circle>
+                                </svg>
+                                <!-- Rating -->
+                                <span class="rating">7.8</span>
                             </div>
                             <div class="reviews__articles-content">
                                 <h3 class="title">London house and garden stud</h3>
@@ -278,11 +258,13 @@
             <div class="wrapper">
                 <h2>Latest Articles</h2>
                 <div class="articles__inner">
+                    <!-- This column contains posts and slider -->
                     <div class="col-1">
+                        <!-- Posts -->
                         <div class="articles__posts">
-                            <article>
+                            <article class="--animation --stop-anim">
                                 <div class="articles__posts-img">
-                                    <img src="./img/articles/img-1.jpg" alt="">
+                                    <img src="./img/articles/img-1.jpg" alt="Beach">
                                 </div>
                                 <div class="articles__posts-content content">
                                         <h3 class="title">Catch waves with an adventure guide</h3>
@@ -292,9 +274,9 @@
                                     <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                                 </div>
                             </article>
-                            <article>
+                            <article class="--animation --stop-anim">
                                 <div class="articles__posts-img">
-                                    <img src="./img/articles/img-2.jpg" alt="">
+                                    <img src="./img/articles/img-2.jpg" alt="Sea">
                                 </div>
                                 <div class="articles__posts-content content">
                                         <h3 class="title">Learn to surf with a Manhattan Beach local</h3>
@@ -304,9 +286,9 @@
                                     <p class="date">Travel<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                                 </div>
                             </article>
-                            <article>
+                            <article class="--animation --stop-anim">
                                 <div class="articles__posts-img">
-                                    <img src="./img/articles/img-3.jpg" alt="">
+                                    <img src="./img/articles/img-3.jpg" alt="Inside building">
                                 </div>
                                 <div class="articles__posts-content content">
                                         <h3 class="title">London house and garden studio</h3>
@@ -317,9 +299,9 @@
                                     <p class="date">Design<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                                 </div>
                             </article>
-                            <article>
+                            <article class="--animation --stop-anim">
                                 <div class="articles__posts-img">
-                                    <img src="./img/articles/img-4.jpg" alt="">
+                                    <img src="./img/articles/img-4.jpg" alt="Beach">
                                 </div>
                                 <div class="articles__posts-content content">
                                         <h3 class="title">Practice yoga on a paddleboard on the ocean</h3>
@@ -331,7 +313,8 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="articles__slider">
+                        <!-- Slider №2 -->
+                        <div class="articles__slider --animation --stop-anim">
                             <div class="articles__slider-carousel">
                                 <div class="articles__slider-inner">
                                     <div class="articles__slider-item">
@@ -363,19 +346,21 @@
                             </div>
                         </div>
                     </div>
+                    <!-- This column contains top posts and banner -->
                     <div class="col-2">
                             <!-- Banner -->
-                            <aside class="aside">
+                            <aside class="aside --animation --stop-anim">
                                     <div class="aside__img">
-                                        <img src="./img/articles/banner.jpg" alt="">
+                                        <img src="./img/articles/banner.jpg" alt="Red car">
                                     </div>
                             </aside>
+                            <!-- Top posts -->
                             <div class="articles__top">
                                 <h2>Top Posts</h2>
                                 <div class="articles__top-block">
-                                    <article class="articles__top-first">
+                                    <article class="articles__top-first --animation --stop-anim">
                                         <div class="articles__top-img">
-                                            <img src="./img/articles/post-1.jpg" alt="">
+                                            <img src="./img/articles/post-1.jpg" alt="Bulding">
                                         </div>
                                         <div class="articles__top-content">
                                             <div>
@@ -386,9 +371,9 @@
                                         </div>
                                     </article>
                                     <div class="articles__top-mini">
-                                        <article class="articles__top-item">
+                                        <article class="articles__top-item --animation --stop-anim">
                                             <div class="articles__top-img">
-                                                <img src="./img/articles/post-2.jpg" alt="">
+                                                <img src="./img/articles/post-2.jpg" alt="Road and mountain">
                                             </div>
                                             <div class="articles__top-content">
                                                 <h3 class="title">The Most Beautiful Highways for Trips</h3>
@@ -396,9 +381,9 @@
                                             </div>
                                             <span class="post-num">2</span>
                                         </article>
-                                        <article class="articles__top-item">
+                                        <article class="articles__top-item --animation --stop-anim">
                                             <div class="articles__top-img">
-                                                <img src="./img/articles/post-3.jpg" alt="">
+                                                <img src="./img/articles/post-3.jpg" alt="Piece of building">
                                             </div>
                                             <div class="articles__top-content">
                                                 <h3 class="title">Mechanisms from a piece of plastic</h3>
@@ -406,9 +391,9 @@
                                             </div>
                                             <span class="post-num">3</span>
                                         </article>
-                                        <article class="articles__top-item">
+                                        <article class="articles__top-item --animation --stop-anim">
                                             <div class="articles__top-img">
-                                                <img src="./img/articles/post-4.jpg" alt="">
+                                                <img src="./img/articles/post-4.jpg" alt="Mountain">
                                             </div>
                                             <div class="articles__top-content">
                                                 <h3 class="title">Contemporary Canadian farmhouse</h3>
@@ -426,10 +411,10 @@
         <section class="fullscreen">
             <div class="fullscreen__inner">
                 <div class="arrow__left">
-                    <img src="./img/latest/arrow_left_off.svg" alt="">
+                    <img src="./img/latest/arrow_left_off.svg" alt="arrow previous">
                 </div>
                 <div class="arrow__right">
-                    <img src="./img/latest/arrow_right_on.svg" alt="">
+                    <img src="./img/latest/arrow_right_on.svg" alt="arrow next">
                 </div>
                 <div class="fullscreen__content">
                     <address>by Jeremy D. Larson</address>
@@ -454,7 +439,7 @@
             <div class="wrapper">
                 <h2>Latest Stories</h2>
                 <div class="stories__articles">
-                    <article>
+                    <article class="--animation --stop-anim">
                         <div class="stories__articles-content content">
                                 <h3 class="title">After layoffs, GoPro’s business appears to be back on track</h3>
                                 <p class="text">
@@ -463,7 +448,7 @@
                             <p class="date">TECH<span>/</span><time datetime="11:54">Today at 11:54</time></p>
                         </div>
                     </article>
-                    <article>
+                    <article class="--animation --stop-anim">
                         <div class="stories__articles-content content">
                                 <h3 class="title"><b>There’s Still Time to Snag the Best Sandals of th</b>e Season</h3>
                                 <p class="text">
@@ -472,7 +457,7 @@
                             <p class="date">Style<span>/</span><time datetime="2017-08-21">August 21 2017</time></p>
                         </div>
                     </article>
-                    <article>
+                    <article class="--animation --stop-anim">
                         <div class="stories__articles-content content">
                                 <h3 class="title">Get to Know Paa, the NYC Brand Giving Normcore</h3>
                                 <p class="text">
@@ -499,7 +484,6 @@
                 <h2>Latest Video</h2>
                 <div class="video__block">
                     <div class="video__player">
-                        <!-- <img src="./img/latest-video/video.jpg" alt="video IKEA"> -->
                         <div id="player"></div>
                         <div class="video__player-tools">
                             <div class="video__player-timeline timeline">
@@ -509,6 +493,15 @@
                                     <img class="video__start" src="./img/latest-video/play.svg" alt="play">
                                     <i class="far fa-pause-circle"></i>
                                     <p class="video__time"><span class="video__current-time">00:00</span> / <span class="video__duration">00:00</span></p>
+                                </div>
+                                <div class="timeline__right">
+                                    <img class="video__fullscreen" src="./img/latest-video/full.svg" alt="fullscreen button">
+                                    <i class="fas fa-compress"></i>
+                                    <div class="video__volume">
+                                        <img class="video__unmute" src="./img/latest-video/volume.svg" alt="volume">
+                                        <input class="video__progress-volume" type="range" min="0" max="100" value="0"/>
+                                        <i class="fas fa-volume-mute"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -554,35 +547,31 @@
                 </div>
             </div>
         </section>
-        <section class="gallery">
-            <div class="gallery__slider">
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-1.jpg" alt="slide 1">
+        <section class="gallery --animation --stop-anim">
+            <div class="gallery__container">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-1.jpg" alt="Bridge">
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-2.jpg" alt="slide 2">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-2.jpg" alt="Lake">
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-3.jpg" alt="slide 3">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-3.jpg" alt="Woman">
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-4.jpg" alt="slide 4">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-4.jpg" alt="Mountain">
                 </div>
-                <div class="gallery__slider-item">
+                <div class="gallery__container-item">
                     <img src="./img/gallery/slide-5.jpg" alt="slide 5">
-                    <!-- <div class="gallery__slider-content">
-                        <p>Follow us on Instagram</p>
-                        <img src="./img/gallery/arrow.svg" alt="arrow right">
-                    </div> -->
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-6.jpg" alt="slide 6">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-6.jpg" alt="Red car">
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-7.jpg" alt="slide 7">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-7.jpg" alt="Cliff">
                 </div>
-                <div class="gallery__slider-item">
-                    <img src="./img/gallery/slide-8.jpg" alt="slide 8">
+                <div class="gallery__container-item">
+                    <img src="./img/gallery/slide-8.jpg" alt="Sea">
                 </div>
             </div>
         </section>
@@ -590,17 +579,17 @@
     <footer class="footer">
         <div class="wrapper">
             <div class="logo">
-                <h1><span>The</span>Siren</h1>
+                <h1 data-link="header"><span>The</span>Siren</h1>
             </div>
                 <nav class="footer__nav nav">
                     <ul>
-                        <li class="nav__link"><a href="#" data-link="hero">Features</a></li>
-                        <li class="nav__link"><a href="#" data-link="stories">Fashion</a></li>
-                        <li class="nav__link"><a href="#" data-link="reviews">Music</a></li>
-                        <li class="nav__link"><a href="#" data-link="latest">Design</a></li>
-                        <li class="nav__link"><a href="#" data-link="articles">Travel</a></li>
-                        <li class="nav__link"><a href="#" data-link="video">Style</a></li>
-                        <li class="nav__link"><a href="#" data-link="gallery">People</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="hero">Features</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="stories">Fashion</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="reviews">Music</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="latest">Design</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="articles">Travel</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="video">Style</a></li>
+                        <li class="nav__link"><a class="footer__link" href="#" data-link="gallery">People</a></li>
                     </ul>
                 </nav>
             <div class="footer__socials">
@@ -633,8 +622,8 @@
             </div>
         </div>
     </footer>
-    <script src="/js/index.js"></script>
-    <script src="/js/video.js"></script>
-    <script src="/js/animation.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/video.js"></script>
+    <script src="./js/animation.js"></script>
 </body>
 </html>
