@@ -18,7 +18,7 @@ body {
   font-family: $logoFont;
   color: $logoFont-color;
   @include adaptiv-font(50, 30);
-  h1 {
+  h1, h2 {
     cursor: pointer;
     position: relative;
     display: inline-block;
